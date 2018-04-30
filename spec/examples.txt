@@ -1,0 +1,9 @@
+example_id                                             | status | run_time        |
+------------------------------------------------------ | ------ | --------------- |
+./spec/controllers/profit_controller_spec.rb[1:1:1]    | passed | 0.00658 seconds |
+./spec/controllers/purchases_controller_spec.rb[1:1:1] | passed | 0.00541 seconds |
+./spec/controllers/sales_controller_spec.rb[1:1:1]     | passed | 0.00443 seconds |
+./spec/features/homepage_spec.rb[1:1]                  | passed | 0.00523 seconds |
+./spec/features/profit_spec.rb[1:1]                    | passed | 0.00481 seconds |
+./spec/features/purchases_spec.rb[1:1]                 | passed | 0.16713 seconds |
+./spec/features/sales_spec.rb[1:1]                     | passed | 0.00584 seconds |

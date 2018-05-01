@@ -1,12 +1,12 @@
-<div class="">
-  <h1>Selected Purchase Details</h1>
-</div>
-
 <%= flash[:notice] %>
-<div class="">
-  <h2>Description: <%= @purchase.description %></h2>
-</div>
+<div class="container">
+  <div class="jumbotron">
+    <h2>Description: <%= @purchase.description %></h2>
+    <h2>Amount: <%= @purchase.amount %></h2><br>
 
-<div class="">
-  <h2>Amount: <%= @purchase.amount %></h2>
+    <div class="col-md-12 text-center">
+      <%= link_to 'Back', purchases_path, class: "btn btn-lg btn-dark" %> |
+      <%= link_to 'Edit', edit_purchase_path(@purchase), class: "btn btn-lg btn-secondary" %>
+  </div>
+  </div>
 </div>

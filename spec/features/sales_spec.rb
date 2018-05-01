@@ -23,5 +23,12 @@ describe 'navigation' do
     it 'has a new form that can be reached' do
       expect(page.status_code).to eq(200)
     end
+
+    it 'has a way to create a sale' do
+      fill_in 'sale[amount]', with: 10
+      fill_in 'sale[description]', with: 'Anything'
+
+      expect { click_on "Save" }.to change(Sale, :count).by(1)
+    end
   end
 end

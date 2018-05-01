@@ -1,11 +1,13 @@
-example_id                                             | status | run_time        |
------------------------------------------------------- | ------ | --------------- |
-./spec/controllers/profit_controller_spec.rb[1:1:1]    | passed | 0.00356 seconds |
-./spec/controllers/purchases_controller_spec.rb[1:1:1] | passed | 0.00491 seconds |
-./spec/controllers/sales_controller_spec.rb[1:1:1]     | failed | 0.00246 seconds |
-./spec/features/homepage_spec.rb[1:1]                  | passed | 0.00644 seconds |
-./spec/features/profit_spec.rb[1:1]                    | passed | 0.00554 seconds |
-./spec/features/purchases_spec.rb[1:1]                 | passed | 0.00575 seconds |
-./spec/features/sales_spec.rb[1:1:1]                   | passed | 0.00393 seconds |
-./spec/features/sales_spec.rb[1:1:2]                   | passed | 0.18931 seconds |
-./spec/features/sales_spec.rb[1:2:1]                   | passed | 0.00402 seconds |
+example_id                                             | status  | run_time        |
+------------------------------------------------------ | ------- | --------------- |
+./spec/controllers/profit_controller_spec.rb[1:1:1]    | passed  | 0.00656 seconds |
+./spec/controllers/purchases_controller_spec.rb[1:1:1] | passed  | 0.00563 seconds |
+./spec/controllers/sales_controller_spec.rb[1:1:1]     | failed  | 0.00173 seconds |
+./spec/features/homepage_spec.rb[1:1]                  | passed  | 0.00939 seconds |
+./spec/features/profit_spec.rb[1:1]                    | passed  | 0.1831 seconds  |
+./spec/features/purchases_spec.rb[1:1]                 | passed  | 0.00986 seconds |
+./spec/features/sales_spec.rb[1:1:1]                   | passed  | 0.00658 seconds |
+./spec/features/sales_spec.rb[1:1:2]                   | passed  | 0.0072 seconds  |
+./spec/features/sales_spec.rb[1:2:1]                   | passed  | 0.02046 seconds |
+./spec/features/sales_spec.rb[1:2:2]                   | passed  | 0.02922 seconds |
+./spec/models/sale_spec.rb[1:1]                        | pending | 0.00001 seconds |

@@ -1,5 +1,13 @@
-<h1>Homepage</h1>
+<h1 class="text-center">MissMoo Program</h1>
+<div class="container">
+  <div class="jumbotron">
+    <h2>Total sales: <%= @sales.sum(:amount) %><br></h2>
+    <h2>Total purchases: <%= @purchases.sum(:amount) %><br></h2>
+    <h2>Profit: <%= @profit %></h2><br>
 
-Total purchases: <%= @purchases.sum(:amount) %><br>
-Total sales: <%= @sales.sum(:amount) %><br>
-Profit: <%= @profit %>
+    <div class="col-md-12 text-center">
+      <%= link_to 'Sales', sales_path, class: "btn btn-lg btn-primary" %>
+      <%= link_to 'Purchases', purchases_path, class: "btn btn-lg btn-info" %>
+    </div>
+</div>
+</div>

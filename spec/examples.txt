@@ -1,13 +1,15 @@
 example_id                                             | status  | run_time        |
 ------------------------------------------------------ | ------- | --------------- |
-./spec/controllers/profit_controller_spec.rb[1:1:1]    | passed  | 0.00656 seconds |
-./spec/controllers/purchases_controller_spec.rb[1:1:1] | passed  | 0.00563 seconds |
+./spec/controllers/profit_controller_spec.rb[1:1:1]    | passed  | 0.00999 seconds |
+./spec/controllers/purchases_controller_spec.rb[1:1:1] | passed  | 0.00441 seconds |
 ./spec/controllers/sales_controller_spec.rb[1:1:1]     | failed  | 0.00173 seconds |
-./spec/features/homepage_spec.rb[1:1]                  | passed  | 0.00939 seconds |
-./spec/features/profit_spec.rb[1:1]                    | passed  | 0.1831 seconds  |
-./spec/features/purchases_spec.rb[1:1]                 | passed  | 0.00986 seconds |
-./spec/features/sales_spec.rb[1:1:1]                   | passed  | 0.00658 seconds |
-./spec/features/sales_spec.rb[1:1:2]                   | passed  | 0.0072 seconds  |
-./spec/features/sales_spec.rb[1:2:1]                   | passed  | 0.02046 seconds |
-./spec/features/sales_spec.rb[1:2:2]                   | passed  | 0.02922 seconds |
+./spec/features/homepage_spec.rb[1:1]                  | passed  | 0.00588 seconds |
+./spec/features/profit_spec.rb[1:1]                    | passed  | 0.13242 seconds |
+./spec/features/purchases_spec.rb[1:1]                 | passed  | 0.00468 seconds |
+./spec/features/sales_spec.rb[1:1:1]                   | passed  | 0.00574 seconds |
+./spec/features/sales_spec.rb[1:1:2]                   | passed  | 0.00534 seconds |
+./spec/features/sales_spec.rb[1:2:1]                   | passed  | 0.01697 seconds |
+./spec/features/sales_spec.rb[1:2:2]                   | passed  | 0.02183 seconds |
+./spec/features/sales_spec.rb[1:3:1]                   | passed  | 0.02126 seconds |
+./spec/features/sales_spec.rb[1:4:1]                   | passed  | 0.01523 seconds |
 ./spec/models/sale_spec.rb[1:1]                        | pending | 0.00001 seconds |

@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <%= sale.id %>
+  </td>
+  <td>
+    <%= sale.amount %>
+  </td>
+  <td>
+    <%= sale.description %>
+  </td>
+  <td >
+    <%= link_to 'Edit', edit_sale_path(sale), id: "edit_#{sale.id}", class: "fa fa-pencil i fa-2x index_icons" %>
+  </td>
+  <td >
+    <%= link_to 'Delete', sale_path(sale), method: :delete, id: "delete_sale_#{sale.id}_from_index", class: "fa fa-trash-o fa-2x index_icons", data: { confirm: "Are you sure?"} %>
+  </td>
+</tr>

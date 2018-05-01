@@ -35,6 +35,18 @@ describe 'navigation' do
 
       expect(page).to have_content(/Total purchases: 35/)
     end
+
+    it 'has a link to the homepage' do
+      click_on 'Home'
+
+      expect(current_path).to eq(root_path)
+    end
+
+    it 'has a link to the sales page' do
+      click_on 'Sales'
+
+      expect(current_path).to eq(sales_path)
+    end
   end
 
   describe 'creation' do

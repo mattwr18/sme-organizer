@@ -20,12 +20,16 @@ class SalesController < ApplicationController
 
     if @sale.save
       redirect_to @sale, notice: "Sale was successfully created"
+    else
+      render :new
     end
   end
 
   def update
     if @sale.update(sale_params)
       redirect_to @sale, notice: "Sale was successfully edited"
+    else
+      render :edit
     end
   end
 

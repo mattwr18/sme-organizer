@@ -13,7 +13,6 @@ class PurchasesController < ApplicationController
   end
 
   def edit
-
   end
 
   def create
@@ -21,12 +20,16 @@ class PurchasesController < ApplicationController
 
     if @purchase.save
       redirect_to purchase_path(@purchase), notice: "Purchase successfully created"
+    else
+      render :new
     end
   end
 
   def update
     if @purchase.update(purchase_params)
       redirect_to purchase_path(@purchase), notice: "Purchase has been successfully edited"
+    else
+      render :edit
     end
   end
 

@@ -18,6 +18,24 @@ describe 'navigation' do
     it 'has a title of Sales' do
       expect(page).to have_content(/Sales/)
     end
+
+    it 'has a list of sales' do
+      sale1 = FactoryBot.build_stubbed(:sale)
+      sale2 = FactoryBot.build_stubbed(:second_sale)
+
+      visit sales_path
+
+      expect(page).to have_content(/Sale|second/)
+    end
+
+    it 'has total of all the sales' do
+      sale1 = FactoryBot.create(:sale)
+      sale2 = FactoryBot.create(:second_sale)
+
+      visit sales_path
+
+      expect(page).to have_content(/Total sales: 21/)
+    end
   end
 
   describe 'creation' do
@@ -27,6 +45,13 @@ describe 'navigation' do
 
     it 'has a new form that can be reached' do
       expect(page.status_code).to eq(200)
+    end
+
+    it 'has a link from the sales page' do
+      visit sales_path
+      click_on 'Create a new sale'
+
+      expect(current_path).to eq(new_sale_path)
     end
 
     it 'has a way to create a sale' do

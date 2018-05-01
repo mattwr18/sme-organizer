@@ -1,4 +1,5 @@
 <h1>Sales</h1>
+<%= link_to 'Create a new sale', new_sale_path %>
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -19,3 +20,6 @@
     <%= render @sales %>
   </tbody>
 </table>
+<div class="">
+  <h2>Total sales: <%= @sales.sum(:amount) %></h2>
+</div>

@@ -1,0 +1,20 @@
+<tr>
+  <td>
+    <%= purchase.id %>
+  </td>
+  <td>
+    <%= purchase.amount %>
+  </td>
+  <td>
+    <%= purchase.description %>
+  </td>
+  <td>
+    <%= link_to 'Show', purchase_path(purchase) %>
+  </td>
+  <td >
+    <%= link_to 'Edit', edit_purchase_path(purchase), id: "edit_#{purchase.id}", class: "fa fa-pencil i fa-2x index_icons" %>
+  </td>
+  <td >
+    <%= link_to 'Delete', purchase_path(purchase), method: :delete, id: "delete_purchase_#{purchase.id}_from_index", class: "fa fa-trash-o fa-2x index_icons", data: { confirm: "Are you sure?"} %>
+  </td>
+</tr>

@@ -1,0 +1,14 @@
+<%= form_for @purchase do |f| %>
+<div class="form-group">
+  <%= f.label :amount, class: "col-sm-2 control-label" %>
+  <%= f.text_field :amount, class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :description, class: "col-sm-2 control-label" %>
+  <%= f.text_area :description, class: "form-control" %>
+</div>
+
+<%= f.submit 'Save', class: "btn btn-primary btn-block" %>
+
+<% end %>

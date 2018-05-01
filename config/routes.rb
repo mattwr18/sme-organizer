@@ -2,6 +2,6 @@ Rails.application.routes.draw do
   root :to => 'homepage#index'
 
   resources :sales
-  get '/purchases' => 'purchases#index'
+  resources :purchases
   get '/profit' => 'profit#index'
 end

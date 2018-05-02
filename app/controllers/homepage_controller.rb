@@ -1,7 +1,7 @@
 class HomepageController < ApplicationController
   def index
-    @purchases = Purchase.all
-    @sales = Sale.all
+    @purchases = Purchase.purchases_by(current_user)
+    @sales = Sale.sales_by(current_user)
     @profit = @sales.sum(:amount) - @purchases.sum(:amount)
   end
 

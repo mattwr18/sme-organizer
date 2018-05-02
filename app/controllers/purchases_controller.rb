@@ -2,7 +2,7 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:edit, :update, :show, :destroy]
 
   def index
-    @purchases = Purchase.all
+    @purchases = Purchase.purchases_by(current_user)
   end
 
   def show
@@ -17,7 +17,8 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase = Purchase.new(purchase_params)
-
+    @purchase.user_id = current_user.id
+    
     if @purchase.save
       redirect_to purchase_path(@purchase), notice: "Purchase successfully created"
     else

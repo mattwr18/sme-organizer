@@ -2,7 +2,7 @@ class SalesController < ApplicationController
   before_action :set_sale, only: [:edit, :update, :show, :destroy]
 
   def index
-    @sales = Sale.all
+    @sales = Sale.sales_by(current_user)
   end
 
   def show
@@ -17,6 +17,7 @@ class SalesController < ApplicationController
 
   def create
     @sale = Sale.new(sale_params)
+    @sale.user_id = current_user.id
 
     if @sale.save
       redirect_to @sale, notice: "Sale was successfully created"

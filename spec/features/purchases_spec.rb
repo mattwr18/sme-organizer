@@ -4,7 +4,7 @@ describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
 
   let(:purchase) do
-    Purchase.create(amount: 10, description: 'Something')
+    Purchase.create(amount: 10, description: 'Something', user_id: user.id)
   end
 
   before do
@@ -33,9 +33,19 @@ describe 'navigation' do
       expect(page).to have_content(/Purchase|second/)
     end
 
+    it 'has a scope so that only purchases creators can see their purchases' do
+       other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
+
+       post_from_other_user = Purchase.create(amount: 12, description: "This post shouldn't be seen", user_id: other_user.id)
+
+       visit purchases_path
+
+       expect(page).to_not have_content(/This post shouldn't be seen/)
+     end
+
     it 'has total of all the purchases' do
-      purchase1 = FactoryBot.create(:purchase)
-      purchase2 = FactoryBot.create(:second_purchase)
+      purchase1 = FactoryBot.create(:purchase, user_id: user.id)
+      purchase2 = FactoryBot.create(:second_purchase, user_id: user.id)
 
       visit purchases_path
 
@@ -48,10 +58,10 @@ describe 'navigation' do
       expect(current_path).to eq(root_path)
     end
 
-    it 'has a link to the sales page' do
-      click_on 'Sales'
+    it 'has a link to the purchases page' do
+      click_on 'Purchases'
 
-      expect(current_path).to eq(sales_path)
+      expect(current_path).to eq(purchases_path)
     end
   end
 
@@ -94,11 +104,16 @@ describe 'navigation' do
 
   describe 'delete' do
     it 'can be deleted' do
-      purchase = Purchase.create(amount: 15, description: 'Kinda expensive')
+      logout(:user)
+
+      delete_user = FactoryBot.create(:user)
+      login_as(delete_user, :scope => :user)
+
+      purchase_to_delete = Purchase.create(amount: 15, description: 'Kinda expensive', user_id: delete_user.id)
 
       visit purchases_path
 
-      click_link("delete_purchase_#{purchase.id}_from_index")
+      click_link("delete_purchase_#{purchase_to_delete.id}_from_index")
 
       expect(page.status_code).to eq(200)
     end

@@ -4,7 +4,7 @@ describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
 
   let(:sale) do
-    Sale.create(amount: 10, description: 'Something')
+    Sale.create(amount: 10, description: 'Something', user_id: user.id)
   end
 
   before do
@@ -33,9 +33,19 @@ describe 'navigation' do
       expect(page).to have_content(/Sale|second/)
     end
 
+    it 'has a scope so that only sales creators can see their sales' do
+       other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
+
+       post_from_other_user = Sale.create(amount: 12, description: "This post shouldn't be seen", user_id: other_user.id)
+
+       visit sales_path
+
+       expect(page).to_not have_content(/This post shouldn't be seen/)
+     end
+
     it 'has total of all the sales' do
-      sale1 = FactoryBot.create(:sale)
-      sale2 = FactoryBot.create(:second_sale)
+      sale1 = FactoryBot.create(:sale, user_id: user.id)
+      sale2 = FactoryBot.create(:second_sale, user_id: user.id)
 
       visit sales_path
 
@@ -94,11 +104,16 @@ describe 'navigation' do
 
   describe 'delete' do
     it 'can be deleted' do
-      sale = Sale.create(amount: 15, description: 'Kinda expensive')
+      logout(:user)
+
+      delete_user = FactoryBot.create(:user)
+      login_as(delete_user, :scope => :user)
+
+      sale_to_delete = Sale.create(amount: 15, description: 'Kinda expensive', user_id: delete_user.id)
 
       visit sales_path
 
-      click_link("delete_sale_#{sale.id}_from_index")
+      click_link("delete_sale_#{sale_to_delete.id}_from_index")
 
       expect(page.status_code).to eq(200)
     end

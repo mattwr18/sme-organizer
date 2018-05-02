@@ -1,8 +1,14 @@
 require 'rails_helper'
 
 describe 'navigation' do
+  let(:user) { FactoryBot.create(:user) }
+
   let(:purchase) do
     Purchase.create(amount: 10, description: 'Something')
+  end
+
+  before do
+    login_as(user, :scope => :user)
   end
 
   describe 'index' do

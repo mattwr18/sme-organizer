@@ -9,14 +9,17 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'support/factory_bot'
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+include Warden::Test::Helpers
+Warden.test_mode!
 
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
-
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  
   config.before(:suite) do
     if config.use_transactional_fixtures?
       raise(<<-MSG)

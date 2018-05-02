@@ -1,12 +1,11 @@
-<%= flash[:notice] %>
 <div class="container">
   <div class="jumbotron">
     <h2>Description: <%= @sale.description %></h2>
     <h2>Amount: <%= @sale.amount %></h2><br>
-    
+
     <div class="col-md-12 text-center">
       <%= link_to 'Back', sales_path, class: "btn btn-lg btn-dark" %> |
       <%= link_to 'Edit', edit_sale_path(@sale), class: "btn btn-lg btn-secondary" %>
-  </div>
+    </div>
   </div>
 </div>

@@ -17,8 +17,8 @@ describe 'navigation' do
   end
 
   it 'has a total of all the sales' do
-    sale1 = FactoryBot.create(:sale)
-    sale2 = FactoryBot.create(:second_sale)
+    sale1 = FactoryBot.create(:sale, user_id: user.id)
+    sale2 = FactoryBot.create(:second_sale, user_id: user.id)
 
     visit root_path
 
@@ -26,8 +26,8 @@ describe 'navigation' do
   end
 
   it 'has total of all the purchases' do
-    purchase1 = FactoryBot.create(:purchase)
-    purchase2 = FactoryBot.create(:second_purchase)
+    purchase1 = FactoryBot.create(:purchase, user_id: user.id)
+    purchase2 = FactoryBot.create(:second_purchase, user_id: user.id)
 
     visit root_path
 
@@ -35,8 +35,8 @@ describe 'navigation' do
   end
 
   it 'has the total profit' do
-    sale = FactoryBot.create(:sale)
-    purchase = FactoryBot.create(:purchase)
+    sale = FactoryBot.create(:sale, user_id: user.id)
+    purchase = FactoryBot.create(:purchase, user_id: user.id)
 
     visit root_path
 

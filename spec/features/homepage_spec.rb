@@ -13,7 +13,7 @@ describe 'navigation' do
   end
 
   it 'has a title' do
-    expect(page).to have_content(/MissMoo/)
+    expect(page).to have_content(/SME Organizer/)
   end
 
   it 'has a total of all the sales' do

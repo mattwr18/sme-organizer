@@ -1,0 +1,23 @@
+<tr>
+  <td>
+    <%= client.id %>
+  </td>
+  <td>
+    <%= client.name %>
+  </td>
+  <td>
+    <%= client.address %>
+  </td>
+  <td>
+    <%= client.obs %>
+  </td>
+  <td>
+    <%= link_to 'Show', client_path(client) %>
+  </td>
+  <td >
+    <%= link_to 'Edit', edit_client_path(client), id: "edit_#{client.id}", class: "fa fa-pencil i fa-2x index_icons" %>
+  </td>
+  <td >
+    <%= link_to 'Delete', client_path(client), method: :delete, id: "delete_client_#{client.id}_from_index", class: "fa fa-trash-o fa-2x index_icons", data: { confirm: "Are you sure?"} %>
+  </td>
+</tr>

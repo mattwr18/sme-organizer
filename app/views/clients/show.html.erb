@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="jumbotron">
+    <h2>Name: <%= @client.name %></h2>
+    <h2>Address: <%= @client.address %></h2><br>
+    <h2>Observation: <%= @client.obs %></h2><br>
+
+    <div class="col-md-12 text-center">
+      <%= link_to 'Back', clients_path, class: "btn btn-lg btn-dark" %> |
+      <%= link_to 'Edit', edit_client_path(@client), class: "btn btn-lg btn-secondary" %>
+    </div>
+  </div>
+</div>

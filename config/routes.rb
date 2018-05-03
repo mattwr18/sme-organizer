@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   resources :sales
   resources :purchases
+  resources :clients
   get '/profit' => 'profit#index'
 end

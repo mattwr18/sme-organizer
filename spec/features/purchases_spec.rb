@@ -87,6 +87,14 @@ describe 'navigation' do
 
       expect { click_on "Save" }.to change(Purchase, :count).by(1)
     end
+
+    it 'will have a user associated with it' do
+      fill_in 'purchase[amount]', with: 11
+      fill_in 'purchase[description]', with: 'User associated'
+      click_on "Save"
+
+      expect(User.last.purchases.last.description).to eq('User associated')
+    end
   end
 
   describe 'edit' do

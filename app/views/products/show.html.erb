@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="jumbotron">
+    <h2>Name: <%= @product.name %></h2><br>
+    <h2>Date: <%= @product.created_at.strftime("%d/%m/%Y") %></h2>
+    <div class="col-md-12 text-center">
+      <%= link_to 'Back', products_path, class: "btn btn-lg btn-dark" %> |
+      <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-lg btn-secondary" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Products</h1>
+</div>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody id="products">
+    <%= render @products %>
+  </tbody>
+</table>
+<div class="container">
+  <%= link_to 'Create a new product', new_product_path, class: "btn btn-block btn-info"%>
+</div>

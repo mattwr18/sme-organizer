@@ -1,0 +1,34 @@
+<%= render 'shared/errors', object: @product %>
+
+<%= form_for @product do |f| %>
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <p><strong>Ingredients:</strong></p>
+
+  <%= f.fields_for :ingredients do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :ingredient_name %><br>
+
+      <%= form.label :amount %>
+      <%= form.number_field :amount, id: :ingredient_amount %><br>
+
+      <%= form.label :amount_type %>
+      <%= form.select :amount_type, ['grams', 'kilos'], {include_blank: ''}, id: :ingredient_amount_type %><br>
+
+      <%= form.label :min_amount %>
+      <%= form.number_field :amount, id: :ingredient_min_amount %><br>
+
+      <%= form.label :min_amount_type %>
+      <%= form.select :amount_type, ['grams', 'kilos'], {include_blank: ''}, id: :ingredient_min_amount_type %><br>
+    </div>
+  <% end %>
+
+<%= f.submit 'Save', class: "btn btn-primary btn-block" %>
+
+<% end %>
+
+<%= link_to 'Back', products_path, class: "btn btn-block btn-info" %>

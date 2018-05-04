@@ -25,6 +25,9 @@
         <%= active_link_to 'Clients', clients_path, active: :exclusive, class: "nav-link" %>
       </li>
       <li class="nav-item">
+        <%= active_link_to 'Products', products_path, active: :exclusive, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
         <%= active_link_to "Logout", destroy_user_session_path, active: :exclusive, method: :delete, class: 'nav-link'  %>
       </li>
     </ul>

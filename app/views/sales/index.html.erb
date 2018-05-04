@@ -1,29 +1,23 @@
 <div class="container">
-  <div class="row">
-    <h1>Sales</h1>
-  </div>
+  <h1>Sales</h1>
 </div>
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
-      <th>
-        #
-      </th>
-      <th>
-        Amount
-      </th>
-      <th>
-        Description
-      </th>
-      <th></th>
-      <th></th>
+      <th>Id</th>
+      <th>Client</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody id="sales">
     <%= render @sales %>
   </tbody>
 </table>
-<div class="">
+<div class="container">
   <h2>Total sales: <%= @sales.sum(:amount) %></h2>
 </div>
-<%= link_to 'Create a new sale', new_sale_path, class: "btn btn-lg btn-info"%>
+<div class="container">
+  <%= link_to 'Create a new sale', new_sale_path, class: "btn btn-block btn-info"%>
+</div>

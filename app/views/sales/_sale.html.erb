@@ -3,6 +3,12 @@
     <%= sale.id %>
   </td>
   <td>
+    <%= sale.client %>
+  </td>
+  <td>
+    <%= sale.created_at.strftime("%d/%m/%Y") %>
+  </td>
+  <td>
     <%= sale.amount %>
   </td>
   <td>

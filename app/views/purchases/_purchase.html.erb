@@ -3,6 +3,9 @@
     <%= purchase.id %>
   </td>
   <td>
+    <%= purchase.created_at.strftime("%d/%m/%Y") %>
+  </td>
+  <td>
     <%= purchase.amount %>
   </td>
   <td>

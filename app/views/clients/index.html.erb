@@ -6,24 +6,16 @@
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
-      <th>
-        #
-      </th>
-      <th>
-        Amount
-      </th>
-      <th>
-        Description
-      </th>
-      <th>
-        Observation
-      </th>
-      <th></th>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Observation</th>
     </tr>
   </thead>
   <tbody id="clients">
     <%= render @clients %>
   </tbody>
 </table>
-
-<%= link_to 'Create a new client', new_client_path, class: "btn btn-lg btn-info" %>
+<div class="container">
+  <%= link_to 'Create a new client', new_client_path, class: "btn btn-block btn-info" %>
+</div>

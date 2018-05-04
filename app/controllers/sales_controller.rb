@@ -46,6 +46,6 @@ private
   end
 
   def sale_params
-    params.require(:sale).permit(:amount, :description)
+    params.require(:sale).permit(:amount, :description, :client)
   end
 end

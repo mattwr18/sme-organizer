@@ -4,7 +4,7 @@ describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
 
   let(:sale) do
-    Sale.create(amount: 10, description: 'Something', user_id: user.id)
+    Sale.create(amount: 10, description: 'Something', client: 'Someone', user_id: user.id)
   end
 
   before do
@@ -36,7 +36,7 @@ describe 'navigation' do
     it 'has a scope so that only sales creators can see their sales' do
        other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
 
-       post_from_other_user = Sale.create(amount: 12, description: "This post shouldn't be seen", user_id: other_user.id)
+       post_from_other_user = Sale.create(amount: 12, description: "This post shouldn't be seen", client: 'One', user_id: other_user.id)
 
        visit sales_path
 
@@ -82,6 +82,11 @@ describe 'navigation' do
     end
 
     it 'has a way to create a sale' do
+      client = FactoryBot.create(:client, user_id: user.id)
+
+      visit new_sale_path
+
+      select "Aarya", from: :sale_client, visible: false
       fill_in 'sale[amount]', with: 10
       fill_in 'sale[description]', with: 'Anything'
 
@@ -89,6 +94,11 @@ describe 'navigation' do
     end
 
     it 'will have a user associated with it' do
+      client = FactoryBot.create(:client, user_id: user.id)
+
+      visit new_sale_path
+
+      select 'Aarya', from: :sale_client, visible: false
       fill_in 'sale[amount]', with: 11
       fill_in 'sale[description]', with: 'User associated'
       click_on "Save"
@@ -117,7 +127,7 @@ describe 'navigation' do
       delete_user = FactoryBot.create(:user)
       login_as(delete_user, :scope => :user)
 
-      sale_to_delete = Sale.create(amount: 15, description: 'Kinda expensive', user_id: delete_user.id)
+      sale_to_delete = Sale.create(amount: 15, description: 'Kinda expensive', client: 'Anyone', user_id: delete_user.id)
 
       visit sales_path
 

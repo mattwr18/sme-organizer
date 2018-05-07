@@ -1,0 +1,13 @@
+<div class="nested-fields container">
+  <div class="field form-group">
+    <%= f.label :ingredient, class: "ingredient_field_name" %>
+    <%= f.text_field :name, class: 'form-control ingredient_name_field' %><br>
+    <div class="">
+      <%= f.label :amount, class: "ingredient_field_amount" %>
+      <%= f.number_field :amount, class: 'form-control ingredient_amount_field' %><br>
+
+      <%= f.label :amount_type, class: "ingredient_field_amount_type" %>
+      <%= f.select :amount_type, ['grams', 'kilos'], {include_blank: ''}, class: 'form-control ingredient_amount_type_field' %><br>
+  </div>
+  </div>
+</div>

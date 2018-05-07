@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 class CreateIngredientsAndProducts < ActiveRecord::Migration[5.2]
   def change
     create_table :ingredients do |t|
       t.string :name
       t.integer :amount
       t.string :amount_type
-      t.integer :min_amount
-      t.string :min_amount_type
 
       t.timestamps
     end

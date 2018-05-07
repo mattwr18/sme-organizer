@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'navigation' do
@@ -8,7 +10,7 @@ describe 'navigation' do
   end
 
   before do
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
   end
 
   describe 'index' do
@@ -34,14 +36,14 @@ describe 'navigation' do
     end
 
     it 'has a scope so that only sales creators can see their sales' do
-       other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
+      other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
 
-       product_from_other_user = Sale.create(amount: 12, description: "This product shouldn't be seen", client: 'One', user_id: other_user.id)
+      product_from_other_user = Sale.create(amount: 12, description: "This product shouldn't be seen", client: 'One', user_id: other_user.id)
 
-       visit sales_path
+      visit sales_path
 
-       expect(page).to_not have_content(/This product shouldn't be seen/)
-     end
+      expect(page).to_not have_content(/This product shouldn't be seen/)
+    end
 
     it 'has total of all the sales' do
       sale1 = FactoryBot.create(:sale, user_id: user.id)
@@ -74,11 +76,11 @@ describe 'navigation' do
 
       visit new_sale_path
 
-      select "Aarya", from: :sale_client, visible: false
+      select 'Aarya', from: :sale_client, visible: false
       fill_in 'sale[amount]', with: 10
       fill_in 'sale[description]', with: 'Anything'
 
-      expect { click_on "Save" }.to change(Sale, :count).by(1)
+      expect { click_on 'Save' }.to change(Sale, :count).by(1)
     end
 
     it 'will have a user associated with it' do
@@ -89,7 +91,7 @@ describe 'navigation' do
       select 'Aarya', from: :sale_client, visible: false
       fill_in 'sale[amount]', with: 11
       fill_in 'sale[description]', with: 'User associated'
-      click_on "Save"
+      click_on 'Save'
 
       expect(User.last.sales.last.description).to eq('User associated')
     end
@@ -113,7 +115,7 @@ describe 'navigation' do
       logout(:user)
 
       delete_user = FactoryBot.create(:user)
-      login_as(delete_user, :scope => :user)
+      login_as(delete_user, scope: :user)
 
       sale_to_delete = Sale.create(amount: 15, description: 'Kinda expensive', client: 'Anyone', user_id: delete_user.id)
 

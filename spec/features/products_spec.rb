@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
 
   let(:product) do
-    Product.create(name: "product1", user_id: user.id)
+    Product.create(name: 'product1', user_id: user.id)
   end
 
   before do
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
   end
 
   describe 'index' do
@@ -34,14 +36,14 @@ describe 'navigation' do
     end
 
     it 'has a scope so that only products creators can see their products' do
-       other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
+      other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
 
-       product_from_other_user = Product.create(name: "This product shouldn't be seen", user_id: other_user.id)
+      product_from_other_user = Product.create(name: "This product shouldn't be seen", user_id: other_user.id)
 
-       visit products_path
+      visit products_path
 
-       expect(page).to_not have_content(/This product shouldn't be seen/)
-     end
+      expect(page).to_not have_content(/This product shouldn't be seen/)
+    end
   end
 
   describe 'creation' do
@@ -61,38 +63,64 @@ describe 'navigation' do
     end
 
     it 'has nested forms for Ingredients' do
-      expect(page).to have_field(:ingredient_name)
-      expect(page).to have_field(:ingredient_amount)
-      expect(page).to have_field(:ingredient_amount_type)
-      expect(page).to have_field(:ingredient_min_amount_type)
+      expect(page).to have_field(:product_ingredients_attributes_0_name)
+      expect(page).to have_field(:product_ingredients_attributes_0_amount)
+      expect(page).to have_field(:product_ingredients_attributes_0_amount_type)
+    end
+
+    context 'more than one indgredient to add', js: true do
+      it 'has a way to add more ingredient forms' do
+        click_on 'Add ingredient'
+        expect(page).to have_content('Ingredient name(2)')
+      end
+
+      it 'can be created with more than one ingredient' do
+        fill_in :product_name, with: 'Product name'
+        fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
+        fill_in :product_ingredients_attributes_0_amount, with: 150
+        select 'grams', from: :product_ingredients_attributes_0_amount_type
+        click_on 'Add ingredient'
+
+        within ('.nested-fields:nth-child(2)') do
+          find('.ingredient_name_field').set('Ingredient2')
+          find('.ingredient_amount_field').set(160)
+          find('.ingredient_amount_type_field').set('grams')
+        end
+
+        click_on 'Add ingredient'
+
+        within ('.nested-fields:nth-child(3)') do
+          find('.ingredient_name_field').set('Ingredient3')
+          find('.ingredient_amount_field').set(1600)
+          find('.ingredient_amount_type_field').set('grams')
+        end
+
+        expect { click_on 'Save' }.to change(Product, :count).by(1)
+      end
     end
 
     it 'allows creation Products with ingredients' do
-      fill_in 'product_name', with: "Product name"
-      fill_in 'ingredient_name', with: "Ingredient name"
-      fill_in 'ingredient_amount', with: 150
-      select 'grams', from: :ingredient_amount_type
-      fill_in 'ingredient_min_amount', with: 150
-      select 'grams', from: :ingredient_min_amount_type
+      fill_in :product_name, with: 'Product name'
+      fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
+      fill_in :product_ingredients_attributes_0_amount, with: 150
+      select 'grams', from: :product_ingredients_attributes_0_amount_type
 
-      expect{ click_on "Save" }.to change(Product, :count).by(1)
+      expect { click_on 'Save' }.to change(Product, :count).by(1)
     end
 
     it 'allows creation Ingredients with prodcuts' do
-      fill_in 'product_name', with: "Product name"
-      fill_in 'ingredient_name', with: "Ingredient name"
-      fill_in 'ingredient_amount', with: 150
-      select 'grams', from: :ingredient_amount_type
-      fill_in 'ingredient_min_amount', with: 150
-      select 'grams', from: :ingredient_min_amount_type
+      fill_in 'Name', with: 'Product'
+      fill_in :product_ingredients_attributes_0_name, with: 'Ingredient1'
+      fill_in :product_ingredients_attributes_0_amount, with: 150
+      select 'grams', from: :product_ingredients_attributes_0_amount_type
 
-      expect{ click_on "Save" }.to change(Ingredient, :count).by(1)
+      expect { click_on 'Save' }.to change(Ingredient, :count).by(1)
     end
 
     it 'allows product creation without ingredients' do
       fill_in 'product[name]', with: 10
 
-      expect { click_on "Save" }.to change(Product, :count).by(1)
+      expect { click_on 'Save' }.to change(Product, :count).by(1)
     end
 
     it 'will have a user associated with it' do
@@ -101,7 +129,7 @@ describe 'navigation' do
       visit new_product_path
 
       fill_in 'product[name]', with: 'User associated'
-      click_on "Save"
+      click_on 'Save'
 
       expect(User.last.products.last.name).to eq('User associated')
     end
@@ -124,9 +152,9 @@ describe 'navigation' do
       logout(:user)
 
       delete_user = FactoryBot.create(:user)
-      login_as(delete_user, :scope => :user)
+      login_as(delete_user, scope: :user)
 
-      product_to_delete = Product.create(name: "product2", user_id: delete_user.id)
+      product_to_delete = Product.create(name: 'product2', user_id: delete_user.id)
 
       visit products_path
 

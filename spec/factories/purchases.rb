@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :purchase do
     amount 15
-    description "FactoryBot purchase"
+    description 'FactoryBot purchase'
     user
   end
 
-  factory :second_purchase, class: "Purchase" do
+  factory :second_purchase, class: 'Purchase' do
     amount 20
-    description "FactoryBot second purchase"
+    description 'FactoryBot second purchase'
     user
   end
 end

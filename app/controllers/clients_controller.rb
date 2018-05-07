@@ -1,26 +1,26 @@
+# frozen_string_literal: true
+
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:edit, :update, :show, :destroy]
+  before_action :set_client, only: %i[edit update show destroy]
 
   def index
     @clients = Client.clients_by(current_user)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @client = Client.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @client = Client.new(client_params)
     @client.user_id = current_user.id
 
     if @client.save
-      redirect_to @client, notice: "Client was succesfully created"
+      redirect_to @client, notice: 'Client was succesfully created'
     else
       render :new
     end
@@ -28,7 +28,7 @@ class ClientsController < ApplicationController
 
   def update
     if @client.update(client_params)
-      redirect_to @client, notice: "Client was successfully edited"
+      redirect_to @client, notice: 'Client was successfully edited'
     else
       render :edit
     end
@@ -37,10 +37,11 @@ class ClientsController < ApplicationController
   def destroy
     @client.delete
 
-    redirect_to clients_path, notice: "Client succesfully deleted"
+    redirect_to clients_path, notice: 'Client succesfully deleted'
   end
 
-private
+  private
+
   def set_client
     @client = Client.find(params[:id])
   end

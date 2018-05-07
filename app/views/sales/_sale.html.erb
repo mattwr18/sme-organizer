@@ -1,22 +1,10 @@
 <tr>
-  <td>
-    <%= sale.id %>
-  </td>
-  <td>
-    <%= sale.client %>
-  </td>
-  <td>
-    <%= sale.created_at.strftime("%d/%m/%Y") %>
-  </td>
-  <td>
-    <%= sale.amount %>
-  </td>
-  <td>
-    <%= sale.description %>
-  </td>
-  <td>
-    <%= link_to 'Show', sale_path(sale) %>
-  </td>
+  <td><%= sale.id %></td>
+  <td><%= sale.client %></td>
+  <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
+  <td><%= sale.amount %></td>
+  <td><%= sale.description %></td>
+  <td><%= link_to 'Show', sale_path(sale) %></td>
   <td >
     <%= link_to 'Edit', edit_sale_path(sale), id: "edit_#{sale.id}", class: "fa fa-pencil i fa-2x index_icons" %>
   </td>

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
 
   before do
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit root_path
   end
 
@@ -44,15 +46,14 @@ describe 'navigation' do
   end
 
   it 'has a link to the sales page' do
-    click_on "Sales"
+    click_on 'Sales'
 
     expect(current_path).to eq(sales_path)
   end
 
   it 'has a link to the purchases page' do
-    click_on "Purchases"
+    click_on 'Purchases'
 
     expect(current_path).to eq(purchases_path)
-
   end
 end

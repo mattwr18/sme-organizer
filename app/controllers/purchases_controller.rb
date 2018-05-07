@@ -1,26 +1,26 @@
+# frozen_string_literal: true
+
 class PurchasesController < ApplicationController
-  before_action :set_purchase, only: [:edit, :update, :show, :destroy]
+  before_action :set_purchase, only: %i[edit update show destroy]
 
   def index
     @purchases = Purchase.purchases_by(current_user)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @purchase = Purchase.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @purchase = Purchase.new(purchase_params)
     @purchase.user_id = current_user.id
-    
+
     if @purchase.save
-      redirect_to purchase_path(@purchase), notice: "Purchase successfully created"
+      redirect_to purchase_path(@purchase), notice: 'Purchase successfully created'
     else
       render :new
     end
@@ -28,7 +28,7 @@ class PurchasesController < ApplicationController
 
   def update
     if @purchase.update(purchase_params)
-      redirect_to purchase_path(@purchase), notice: "Purchase has been successfully edited"
+      redirect_to purchase_path(@purchase), notice: 'Purchase has been successfully edited'
     else
       render :edit
     end
@@ -37,10 +37,11 @@ class PurchasesController < ApplicationController
   def destroy
     @purchase.delete
 
-    redirect_to purchases_path, notice: "Purchase has been succesfully deleted"
+    redirect_to purchases_path, notice: 'Purchase has been succesfully deleted'
   end
 
-private
+  private
+
   def set_purchase
     @purchase = Purchase.find(params[:id])
   end

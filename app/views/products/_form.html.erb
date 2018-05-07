@@ -1,34 +1,30 @@
 <%= render 'shared/errors', object: @product %>
 
-<%= form_for @product do |f| %>
+<%= form_for @product, html: { role: 'form', id: 'product_form' } do |f| %>
   <div class="form-group">
     <%= f.label :name, class: "col-sm-2 control-label" %>
     <%= f.text_field :name, class: "form-control" %>
   </div>
 
-  <p><strong>Ingredients:</strong></p>
+  <div id="ingredients" class="form-group">
+    <%= f.fields_for :ingredients do |ingredient| %>
+      <%= render 'ingredient_fields', f: ingredient %>
+    <% end %>
 
-  <%= f.fields_for :ingredients do |form| %>
-    <div>
-      <%= form.label :name %>
-      <%= form.text_field :name, id: :ingredient_name %><br>
-
-      <%= form.label :amount %>
-      <%= form.number_field :amount, id: :ingredient_amount %><br>
-
-      <%= form.label :amount_type %>
-      <%= form.select :amount_type, ['grams', 'kilos'], {include_blank: ''}, id: :ingredient_amount_type %><br>
-
-      <%= form.label :min_amount %>
-      <%= form.number_field :amount, id: :ingredient_min_amount %><br>
-
-      <%= form.label :min_amount_type %>
-      <%= form.select :amount_type, ['grams', 'kilos'], {include_blank: ''}, id: :ingredient_min_amount_type %><br>
+    <div class="links form-group">
+          <%= link_to_add_association 'Add ingredient', f, :ingredients, class: "btn btn-block btn-primary" %><br>
     </div>
-  <% end %>
+  </div>
 
-<%= f.submit 'Save', class: "btn btn-primary btn-block" %>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <%= link_to 'Back', products_path, class: "btn btn-block btn-info" %><br>
+      </div>
 
+      <div class="col-md-8">
+        <%= f.submit 'Save', class: "btn btn-success btn-block" %><br>
+      </div>
+    </div>
+  </div>
 <% end %>
-
-<%= link_to 'Back', products_path, class: "btn btn-block btn-info" %>

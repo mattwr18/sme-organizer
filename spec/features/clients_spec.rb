@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'navigation' do
@@ -8,7 +10,7 @@ describe 'navigation' do
   end
 
   before do
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
   end
 
   describe 'index' do
@@ -36,7 +38,7 @@ describe 'navigation' do
     it 'has a scope so that only clients creators can see their clients' do
       other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
 
-      post_from_other_user = Client.create(name: "Daenaryes", address: "some fake address", user_id: other_user.id)
+      post_from_other_user = Client.create(name: 'Daenaryes', address: 'some fake address', user_id: other_user.id)
 
       visit clients_path
 
@@ -77,13 +79,13 @@ describe 'navigation' do
       fill_in 'client[address]', with: 'Anything'
       fill_in 'client[obs]', with: 'Something'
 
-      expect { click_on "Save" }.to change(Client, :count).by(1)
+      expect { click_on 'Save' }.to change(Client, :count).by(1)
     end
 
     it 'will have a user associated with it' do
       fill_in 'client[name]', with: 'Associated'
       fill_in 'client[address]', with: 'User associated'
-      click_on "Save"
+      click_on 'Save'
 
       expect(User.last.clients.last.address).to eq('User associated')
     end
@@ -108,7 +110,7 @@ describe 'navigation' do
       logout(:user)
 
       delete_user = FactoryBot.create(:user)
-      login_as(delete_user, :scope => :user)
+      login_as(delete_user, scope: :user)
 
       client_to_delete = Client.create(name: 'Matt', address: 'delete address', obs: 'something important', user_id: delete_user.id)
 

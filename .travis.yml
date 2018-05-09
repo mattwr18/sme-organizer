@@ -3,23 +3,26 @@ language: ruby
 rvm:
 - 2.5.0
 env:
-  - MOZ_HEADLESS=1
+- MOZ_HEADLESS=1
 addons:
   firefox: latest
 before_install:
-  - wget https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz
-  - mkdir geckodriver
-  - tar -xvf geckodriver-v0.20.1-linux64.tar.gz -C geckodriver
-  - export PATH=$PATH:$PWD/geckodriver
+- wget https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz
+- mkdir geckodriver
+- tar -xvf geckodriver-v0.20.1-linux64.tar.gz -C geckodriver
+- export PATH=$PATH:$PWD/geckodriver
 services:
-  - postgresql
+- postgresql
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+- psql -c 'create database travis_ci_test;' -U postgres
 script:
-  - RAILS_ENV=test bundle exec rails db:migrate --trace
-  - bundle exec rails db:test:prepare
-  - bundle exec rspec spec/
+- RAILS_ENV=test bundle exec rails db:migrate --trace
+- bundle exec rails db:test:prepare
+- bundle exec rspec spec/
 deploy:
   provider: heroku
   api_key:
-    secure: j3gvrX/faGfDWFzzE2OArRx1LzkogLVSYlxzbgDsgT1S7M1FAozQJlZ9cvvn0KY3PMGHtKO3+tz9+S0TWJqwWE1KdMNYJgdaj+jz3H05pneI+mXFIle5DIWpTamJPKjwVlAJSXgErBknkkw9fdQRwDyyel7ph/aQcYFUxvrpQrcc41ddfDQyuTitPEmqqI/9KoEulY4Pvkz3w10YUJxS+vN3pM1wAlG9aIMWLRJWYAkPv00IyS1R4WgYMSPNN5mjRLl0wpnunSaamXOAfPE5pUoX8pYk++JjSo0XS7KQhqkcAodz/h3RDRpZn2UaVAUcaQbGoZfjm8i9nuYYlQDmvJrp8UyKA7PmU6xHi0VDe/+LiU4OBSTiS3TT3itSkbAFRh3GSGBDG89ZFeNY6gsuxwqxrHQj8dmhLqnSWBHNwLx6h6xLfVDk2akNKOI/DRNcH/cFPkevHCrdz2ICKxvhWLDyJF6hZabnAJeSDwvNPfcuUAEJk4PXArSg/ldeWzw3OeyDjG4k7DFN3aANAYASB8hgFQA0Eo6Hgs0HHZIzpeh8cm8ZTQl5TaF73sQsNj04qBN+ZsVLsIcnW/03pAXVTUoccn2ZFvtaiUyLJyzdjDiT4AeavOebFt2d9P/mDur1WRI7ywDsuBugGcIbPjB9EauehAN0jwW9xhkPBOkP2ME=
+    secure: mpNpcSUp9zwj+ZuxwhtOY0z/NITyRiQ+QjMWSBr4QEcdugTI6Lp9v9RPKtvJLkv7ouZ7umVAG5+P8SfY3kwiP3d62WySRNjuqJZovGy0czbl9FG5Ba0cxYlYx1k4A3saLdvYIT5oP9yctSgxdWWyH0pHnuiQFNe48iXx/CMZHIY+Xqx0NUUGiw+8VRLRFM0Blxemf0/WosPV++OiQ3i2DcsrWqff+GeW0lCsnnaTLTupSmI/BUCTQuTQerDwM5CQywafUMH6px/u/DlKnUEabbgb/vSJ/5zpwFl4NjY67B/V4w+yEStxS+bIcWU7PziqvWa02U89G7pdYucbv7My5tgpifA2VLg12H1nfvulxSXFms+/PXlNAc4PzTr36nU/EScepHrLffcUn0j0HHp+tWCQg19BZZG/C9dMUHTHD1y6OIPYn5GK9xG9e9G4ws6nK1O4V3IY+3WAk6nfGLnWF3X2Ve3wELH9MxB8PkfPrBA4Yq+jKxQBnviLmgJStA+OdB85iFYFS4McvNkIg3ac9y8iMGoOnKPd61RhFhSdITyeG7thr2SUiA2SU3CtAxEufrFF8EFc0bd8ItR94Dn0+f5inGu+X1qGC0EgYSDjs2qhzYL7AJSvBCl4+4ZFDU4GaCMU78uVtS0+kjpzY80JRUym2+dCm0c8crRVRVT+LUA=
+  app: sme-organizer
+  on:
+    repo: mattwr18/sme-organizer

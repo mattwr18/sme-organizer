@@ -71,7 +71,10 @@ describe 'navigation' do
     context 'more than one indgredient to add', js: true do
       it 'has a way to add more ingredient forms' do
         click_on 'Add ingredient'
-        expect(page).to have_content('Ingredient name(2)')
+
+        within ('.nested-fields:nth-child(2)') do
+          expect(page).to have_content('Ingredient')
+        end
       end
 
       it 'can be created with more than one ingredient' do
@@ -99,7 +102,7 @@ describe 'navigation' do
       end
     end
 
-    it 'allows creation Products with ingredients' do
+    it 'allows Product creation with ingredients' do
       fill_in :product_name, with: 'Product name'
       fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
       fill_in :product_ingredients_attributes_0_amount, with: 150
@@ -108,7 +111,7 @@ describe 'navigation' do
       expect { click_on 'Save' }.to change(Product, :count).by(1)
     end
 
-    it 'allows creation Ingredients with prodcuts' do
+    it 'allows Ingredient creation with prodcuts' do
       fill_in 'Name', with: 'Product'
       fill_in :product_ingredients_attributes_0_name, with: 'Ingredient1'
       fill_in :product_ingredients_attributes_0_amount, with: 150

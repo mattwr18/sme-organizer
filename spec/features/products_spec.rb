@@ -102,7 +102,7 @@ describe 'navigation' do
       end
     end
 
-    it 'allows Product creation with ingredients' do
+    it 'allows product creation with ingredients' do
       fill_in :product_name, with: 'Product name'
       fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
       fill_in :product_ingredients_attributes_0_amount, with: 150
@@ -111,7 +111,7 @@ describe 'navigation' do
       expect { click_on 'Save' }.to change(Product, :count).by(1)
     end
 
-    it 'allows Ingredient creation with prodcuts' do
+    it 'allows ingredient creation with prodcuts' do
       fill_in 'Name', with: 'Product'
       fill_in :product_ingredients_attributes_0_name, with: 'Ingredient1'
       fill_in :product_ingredients_attributes_0_amount, with: 150

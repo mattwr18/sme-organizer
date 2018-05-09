@@ -1,14 +1,19 @@
+dist: xenial
 language: ruby
 rvm:
 - 2.5.0
+env:
+  - MOZ_HEADLESS=1
+addons:
+  firefox: latest
 services:
   - postgresql
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
   - RAILS_ENV=test bundle exec rails db:migrate --trace
   - bundle exec rails db:test:prepare
   - bundle exec rspec spec/
-before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
 deploy:
   provider: heroku
   api_key:

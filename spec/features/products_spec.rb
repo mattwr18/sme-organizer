@@ -4,10 +4,12 @@ require 'rails_helper'
 
 describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
+  let(:ingredient) { FactoryBot.create(:ingredient) }
 
   let(:product) do
     Product.create(name: 'product1', user_id: user.id)
   end
+
 
   before do
     login_as(user, scope: :user)
@@ -140,14 +142,39 @@ describe 'navigation' do
   end
 
   describe 'edit' do
-    it 'can be edited' do
+    before do
       visit edit_product_path(product)
+    end
 
+    it 'can be edited' do
       fill_in 'product[name]', with: 'Edited product'
-
       click_on 'Save'
-
       expect(page).to have_content(/Edited product/)
+    end
+
+    context 'editing ingredients', js: true do
+      it 'allows an ingredient to be added later' do
+        click_on 'Add ingredient'
+
+        within ('.nested-fields:nth-child(1)') do
+          find('.ingredient_name_field').set('Edited ingredient name')
+        end
+
+        click_on 'Save'
+        expect(page).to have_content(/Edited ingredient name/)
+      end
+
+      it 'allows editing of ingredients' do
+        product_with_ingredient = FactoryBot.create(:product_with_ingredient)
+        visit edit_product_path(product_with_ingredient)
+
+        within ('.nested-fields:nth-child(1)') do
+          find('.ingredient_name_field').set('Edited ingredient name')
+        end
+
+        click_on 'Save'
+        expect(page).to have_content(/Edited ingredient name/)
+      end
     end
   end
 

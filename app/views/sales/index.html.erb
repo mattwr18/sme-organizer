@@ -15,6 +15,9 @@
     <%= render @sales %>
   </tbody>
 </table>
+
+<%= paginate @sales, theme: 'twitter-bootstrap-4' %>
+
 <div class="container">
   <h2>Total sales: <%= @sales.sum(:amount) %></h2>
 </div>

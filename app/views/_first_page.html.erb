@@ -1,0 +1,5 @@
+<% unless current_page.first? %>
+  <li class="page-item">
+    <%= link_to_unless current_page.first?, t('views.pagination.first'), url, class: 'page-link', remote: remote %>
+  </li>
+<% end %>

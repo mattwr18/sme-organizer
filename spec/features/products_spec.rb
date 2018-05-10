@@ -81,13 +81,13 @@ describe 'navigation' do
         fill_in :product_name, with: 'Product name'
         fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
         fill_in :product_ingredients_attributes_0_amount, with: 150
-        select 'grams', from: :product_ingredients_attributes_0_amount_type
+        select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
         click_on 'Add ingredient'
 
         within ('.nested-fields:nth-child(2)') do
           find('.ingredient_name_field').set('Ingredient2')
           find('.ingredient_amount_field').set(160)
-          find('.ingredient_amount_type_field').set('grams')
+          find('.ingredient_amount_type_field').set('gram(s)')
         end
 
         click_on 'Add ingredient'
@@ -95,7 +95,7 @@ describe 'navigation' do
         within ('.nested-fields:nth-child(3)') do
           find('.ingredient_name_field').set('Ingredient3')
           find('.ingredient_amount_field').set(1600)
-          find('.ingredient_amount_type_field').set('grams')
+          find('.ingredient_amount_type_field').set('gram(s)')
         end
 
         expect { click_on 'Save' }.to change(Product, :count).by(1)
@@ -106,7 +106,7 @@ describe 'navigation' do
       fill_in :product_name, with: 'Product name'
       fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
       fill_in :product_ingredients_attributes_0_amount, with: 150
-      select 'grams', from: :product_ingredients_attributes_0_amount_type
+      select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
 
       expect { click_on 'Save' }.to change(Product, :count).by(1)
     end
@@ -115,7 +115,7 @@ describe 'navigation' do
       fill_in 'Name', with: 'Product'
       fill_in :product_ingredients_attributes_0_name, with: 'Ingredient1'
       fill_in :product_ingredients_attributes_0_amount, with: 150
-      select 'grams', from: :product_ingredients_attributes_0_amount_type
+      select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
 
       expect { click_on 'Save' }.to change(Ingredient, :count).by(1)
     end

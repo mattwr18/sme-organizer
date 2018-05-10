@@ -7,7 +7,7 @@
       <%= f.number_field :amount, class: 'form-control ingredient_amount_field' %><br>
 
       <%= f.label :amount_type, class: "ingredient_field_amount_type" %>
-      <%= f.select :amount_type, ['grams', 'kilos'], {include_blank: ''}, class: 'form-control ingredient_amount_type_field' %><br>
+      <%= f.select :amount_type, ['gram(s)', 'kilo(s)', 'liter(s)', 'millilter(s)'], {include_blank: ''}, class: 'form-control ingredient_amount_type_field' %><br>
   </div>
   </div>
 </div>

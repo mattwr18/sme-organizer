@@ -10,21 +10,23 @@
     <%= f.fields_for :ingredients do |ingredient| %>
       <%= render 'ingredient_fields', f: ingredient %>
     <% end %>
+    <div class="container links">
+      <div class="row">
+          <%= f.submit 'Save', class: "btn btn-success btn-block" %><br>
+      </div>
+    </div>
 
-    <div class="links form-group">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <%= link_to 'Back', products_path, class: "btn btn-block btn-info" %><br>
+        </div>
+
+        <div class="col-md-6">
           <%= link_to_add_association 'Add ingredient', f, :ingredients, class: "btn btn-block btn-primary" %><br>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4">
-        <%= link_to 'Back', products_path, class: "btn btn-block btn-info" %><br>
-      </div>
-
-      <div class="col-md-8">
-        <%= f.submit 'Save', class: "btn btn-success btn-block" %><br>
+        </div>
       </div>
     </div>
-  </div>
+
+    </div>
 <% end %>

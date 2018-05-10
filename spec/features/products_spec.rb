@@ -68,6 +68,31 @@ describe 'navigation' do
       expect(page).to have_field(:product_ingredients_attributes_0_amount_type)
     end
 
+
+    it 'allows product creation with ingredients' do
+      fill_in :product_name, with: 'Product name'
+      fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
+      fill_in :product_ingredients_attributes_0_amount, with: 150
+      select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
+
+      expect { click_on 'Save' }.to change(Product, :count).by(1)
+    end
+
+    it 'allows ingredient creation with prodcuts' do
+      fill_in 'Name', with: 'Product'
+      fill_in :product_ingredients_attributes_0_name, with: 'Ingredient1'
+      fill_in :product_ingredients_attributes_0_amount, with: 150
+      select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
+
+      expect { click_on 'Save' }.to change(Ingredient, :count).by(1)
+    end
+
+    it 'allows product creation without ingredients' do
+      fill_in 'product[name]', with: 10
+
+      expect { click_on 'Save' }.to change(Product, :count).by(1)
+    end
+
     context 'more than one indgredient to add', js: true do
       it 'has a way to add more ingredient forms' do
         click_on 'Add ingredient'
@@ -100,30 +125,6 @@ describe 'navigation' do
 
         expect { click_on 'Save' }.to change(Product, :count).by(1)
       end
-    end
-
-    it 'allows product creation with ingredients' do
-      fill_in :product_name, with: 'Product name'
-      fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
-      fill_in :product_ingredients_attributes_0_amount, with: 150
-      select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
-
-      expect { click_on 'Save' }.to change(Product, :count).by(1)
-    end
-
-    it 'allows ingredient creation with prodcuts' do
-      fill_in 'Name', with: 'Product'
-      fill_in :product_ingredients_attributes_0_name, with: 'Ingredient1'
-      fill_in :product_ingredients_attributes_0_amount, with: 150
-      select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
-
-      expect { click_on 'Save' }.to change(Ingredient, :count).by(1)
-    end
-
-    it 'allows product creation without ingredients' do
-      fill_in 'product[name]', with: 10
-
-      expect { click_on 'Save' }.to change(Product, :count).by(1)
     end
 
     it 'will have a user associated with it' do

@@ -12,6 +12,11 @@ RSpec.describe Sale, type: :model do
       expect(@sale).to be_valid
     end
 
+    it 'cannot be created without a client' do
+      @sale.client = nil
+      expect(@sale).to_not be_valid
+    end
+
     it 'cannot be created without an amount' do
       @sale.amount = nil
       expect(@sale).to_not be_valid

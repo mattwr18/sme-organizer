@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Sale, type: :model do
+RSpec.describe Purchase, type: :model do
   describe 'creation' do
     before do
       @purchase = FactoryBot.create(:purchase)
@@ -11,6 +11,12 @@ RSpec.describe Sale, type: :model do
     it 'can be created' do
       expect(@purchase).to be_valid
     end
+
+    it 'cannot be created without a vendor' do
+      @purchase.vendor = nil
+      expect(@purchase).to_not be_valid
+    end
+
 
     it 'cannot be created without an amount' do
       @purchase.amount = nil

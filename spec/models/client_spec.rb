@@ -16,10 +16,5 @@ RSpec.describe Client, type: :model do
       @client.name = nil
       expect(@client).to_not be_valid
     end
-
-    it 'cannot be created without a address' do
-      @client.address = nil
-      expect(@client).to_not be_valid
-    end
   end
 end

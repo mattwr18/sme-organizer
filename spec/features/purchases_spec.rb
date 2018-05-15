@@ -6,7 +6,7 @@ describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
 
   let(:purchase) do
-    Purchase.create(amount: 10, description: 'Something', user_id: user.id)
+    Purchase.create(amount: 10, description: 'Something', vendor: 'Someone', user_id: user.id)
   end
 
   before do
@@ -38,7 +38,7 @@ describe 'navigation' do
     it 'has a scope so that only purchases creators can see their purchases' do
       other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
 
-      post_from_other_user = Purchase.create(amount: 12, description: "This post shouldn't be seen", user_id: other_user.id)
+      purchase_from_other_user = Purchase.create(amount: 12, description: "This post shouldn't be seen", vendor: 'New', user_id: other_user.id)
 
       visit purchases_path
 
@@ -53,22 +53,11 @@ describe 'navigation' do
 
       expect(page).to have_content(/Total purchases: 35/)
     end
-
-    it 'has a link to the homepage' do
-      click_on 'Home'
-
-      expect(current_path).to eq(root_path)
-    end
-
-    it 'has a link to the purchases page' do
-      click_on 'Purchases'
-
-      expect(current_path).to eq(purchases_path)
-    end
   end
 
   describe 'creation' do
     before do
+      vendor = FactoryBot.create(:vendor, user_id: user.id)
       visit new_purchase_path
     end
 
@@ -76,14 +65,8 @@ describe 'navigation' do
       expect(page.status_code).to eq(200)
     end
 
-    it 'has a link from the purchases page' do
-      visit purchases_path
-      click_on 'Create a new purchase'
-
-      expect(current_path).to eq(new_purchase_path)
-    end
-
     it 'has a way to create a purchase' do
+      select 'FactoryBot vendor', from: :purchase_vendor, visible: false
       fill_in 'purchase[amount]', with: 10
       fill_in 'purchase[description]', with: 'Anything'
 
@@ -91,6 +74,7 @@ describe 'navigation' do
     end
 
     it 'will have a user associated with it' do
+      select 'FactoryBot vendor', from: :purchase_vendor, visible: false
       fill_in 'purchase[amount]', with: 11
       fill_in 'purchase[description]', with: 'User associated'
       click_on 'Save'
@@ -119,7 +103,7 @@ describe 'navigation' do
       delete_user = FactoryBot.create(:user)
       login_as(delete_user, scope: :user)
 
-      purchase_to_delete = Purchase.create(amount: 15, description: 'Kinda expensive', user_id: delete_user.id)
+      purchase_to_delete = Purchase.create(amount: 15, description: 'Kinda expensive', vendor: 'Some vendor', user_id: delete_user.id)
 
       visit purchases_path
 

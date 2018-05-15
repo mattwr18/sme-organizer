@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="jumbotron">
+    <h2>Name: <%= @vendor.name %></h2>
+    <h2>Address: <%= @vendor.phone_number %></h2><br>
+    <h2>Observation: <%= @vendor.obs %></h2><br>
+
+    <div class="col-md-12 text-center">
+      <%= link_to 'Back', vendors_path, class: "btn btn-lg btn-dark" %> |
+      <%= link_to 'Create new vendor', new_vendor_path, class: "btn btn-lg btn-secondary" %> |
+      <%= link_to 'Edit', edit_vendor_path(@vendor), class: "btn btn-lg btn-dark" %>
+    </div>
+  </div>
+</div>

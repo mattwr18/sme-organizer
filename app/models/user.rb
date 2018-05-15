@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :purchases
   has_many :clients
   has_many :products
+  has_many :vendors
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

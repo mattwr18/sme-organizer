@@ -53,10 +53,16 @@ describe 'navigation' do
 
       expect(page).to have_content(/Total sales: 21/)
     end
+
+    it 'has a link from the sales page' do
+      click_on 'Create a new sale'
+      expect(current_path).to eq(new_sale_path)
+    end
   end
 
   describe 'creation' do
     before do
+      client = FactoryBot.create(:client, user_id: user.id)
       visit new_sale_path
     end
 
@@ -64,18 +70,7 @@ describe 'navigation' do
       expect(page.status_code).to eq(200)
     end
 
-    it 'has a link from the sales page' do
-      visit sales_path
-      click_on 'Create a new sale'
-
-      expect(current_path).to eq(new_sale_path)
-    end
-
     it 'has a way to create a sale' do
-      client = FactoryBot.create(:client, user_id: user.id)
-
-      visit new_sale_path
-
       select 'Aarya', from: :sale_client, visible: false
       fill_in 'sale[amount]', with: 10
       fill_in 'sale[description]', with: 'Anything'
@@ -84,10 +79,6 @@ describe 'navigation' do
     end
 
     it 'will have a user associated with it' do
-      client = FactoryBot.create(:client, user_id: user.id)
-
-      visit new_sale_path
-
       select 'Aarya', from: :sale_client, visible: false
       fill_in 'sale[amount]', with: 11
       fill_in 'sale[description]', with: 'User associated'

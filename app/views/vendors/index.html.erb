@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <h1>Clients</h1>
+  </div>
+</div>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Phone number</th>
+      <th>Observation</th>
+    </tr>
+  </thead>
+  <tbody id="vendors">
+    <%= render @vendors %>
+  </tbody>
+</table>
+<div class="container">
+  <%= link_to 'Create a new vendor', new_vendor_path, class: "btn btn-block btn-info" %>
+</div>

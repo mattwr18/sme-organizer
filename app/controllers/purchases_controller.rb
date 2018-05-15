@@ -4,7 +4,7 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: %i[edit update show destroy]
 
   def index
-    @purchases = Purchase.purchases_by(current_user)
+    @purchases = Purchase.purchases_by(current_user).order(created_at: :desc)
   end
 
   def show; end

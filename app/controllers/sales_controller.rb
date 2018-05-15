@@ -4,7 +4,7 @@ class SalesController < ApplicationController
   before_action :set_sale, only: %i[edit update show destroy]
 
   def index
-    @sales = Sale.sales_by(current_user).page(params[:page]).per(10)
+    @sales = Sale.sales_by(current_user).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show; end

@@ -6,6 +6,7 @@ FactoryBot.define do
     user
 
     factory :product_with_ingredient do
+      name 'Product with ingredient'
       transient do
         ingredients_count 1
 

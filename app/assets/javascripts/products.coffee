@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery(document).on 'turbolinks:load', ->
   ingredients = $('#ingredients')
+  $('#add-new-ingredient').click (event) ->
+    event.preventDefault()
+    $('.ingredient-amount-field').prop 'disabled', false
 
   ingredients.on 'cocoon:before-insert', (e, el_to_add) ->
     el_to_add.fadeIn("slow")

@@ -13,7 +13,9 @@ class SalesController < ApplicationController
     @sale = Sale.new
   end
 
-  def edit; end
+  def edit
+    @products = Product.products_by(current_user)
+   end
 
   def create
     @sale = Sale.new(sale_params)
@@ -47,6 +49,6 @@ class SalesController < ApplicationController
   end
 
   def sale_params
-    params.require(:sale).permit(:amount, :description, :client)
+    params.require(:sale).permit(:amount, :description, :client, :quantity, product_ids: [])
   end
 end

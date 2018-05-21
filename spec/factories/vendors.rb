@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :vendor do
-    name "FactoryBot vendor"
-    phone_number "555-1212"
-    obs "Pay ontime"
+    name 'FactoryBot vendor'
+    phone_number '555-1212'
+    obs 'Pay ontime'
     user
   end
 

@@ -10,7 +10,6 @@ describe 'navigation' do
     Product.create(name: 'product1', user_id: user.id)
   end
 
-
   before do
     login_as(user, scope: :user)
   end
@@ -70,7 +69,6 @@ describe 'navigation' do
       expect(page).to have_field(:product_ingredients_attributes_0_amount_type)
     end
 
-
     it 'allows product creation with ingredients' do
       fill_in :product_name, with: 'Product name'
       fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
@@ -91,7 +89,6 @@ describe 'navigation' do
 
     it 'allows product creation without ingredients' do
       fill_in 'product[name]', with: 10
-
       expect { click_on 'Save' }.to change(Product, :count).by(1)
     end
 
@@ -126,6 +123,12 @@ describe 'navigation' do
         end
 
         expect { click_on 'Save' }.to change(Product, :count).by(1)
+      end
+
+      it 'allows selection of previously used ingredients' do
+        ingredient1 = FactoryBot.create(:ingredient)
+        visit new_product_path
+        select 'MyString', from: :product_ingredients_attributes_0_products
       end
     end
 
@@ -179,19 +182,27 @@ describe 'navigation' do
   end
 
   describe 'delete' do
-    it 'can be deleted' do
+    before do
       logout(:user)
 
-      delete_user = FactoryBot.create(:user)
-      login_as(delete_user, scope: :user)
+      @delete_user = FactoryBot.create(:user)
+      login_as(@delete_user, scope: :user)
+    end
 
-      product_to_delete = Product.create(name: 'product2', user_id: delete_user.id)
-
+    it 'can be deleted' do
+      product_to_delete = Product.create(name: 'product2', user_id: @delete_user.id)
       visit products_path
 
       click_link("delete_product_#{product_to_delete.id}_from_index")
 
       expect(page.status_code).to eq(200)
+    end
+
+    it 'allows deletion of ingredients' do
+      product_with_ingredient_to_delete = FactoryBot.create(:product_with_ingredient, user_id: @delete_user.id)
+      visit edit_product_path(product_with_ingredient_to_delete)
+
+      check 'Product with ingredient'
     end
   end
 end

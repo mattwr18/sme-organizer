@@ -1,8 +1,16 @@
 <div class="container">
   <div class="jumbotron">
+    <h2>Client: <%= @sale.client %></h2>
+    <h2>Product:
+    <div class="container products-list">
+      <% @sale.products.each do |product| %>
+        <%= product.name %><br>
+      <% end %>
+    </div>
+    </h2>
+    <h2>Quantity: <%= @sale.quantity %></h2>
     <h2>Description: <%= @sale.description %></h2>
-    <h2>Amount: <%= @sale.amount %></h2><br>
-
+    <h2>Amount: $<%= @sale.amount %></h2><br>
     <div class="col-md-12 text-center">
       <%= link_to 'Back', sales_path, class: "btn btn-lg btn-dark" %> |
       <%= link_to 'Create new sale', new_sale_path, class: "btn btn-lg btn-secondary" %> |

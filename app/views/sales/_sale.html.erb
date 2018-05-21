@@ -1,8 +1,14 @@
 <tr>
   <td><%= sale.id %></td>
-  <td><%= sale.client %></td>
   <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
-  <td><%= sale.amount %></td>
+  <td><%= sale.client %></td>
+  <td>
+    <% sale.products.each do |product| %>
+      <%= product.name %><br>
+    <% end %>
+  </td>
+  <td><%= sale.quantity %></td>
+  <td>$<%= sale.amount %></td>
   <td><%= sale.description %></td>
   <td><%= link_to 'Show', sale_path(sale) %></td>
   <td >

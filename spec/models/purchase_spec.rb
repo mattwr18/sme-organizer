@@ -17,7 +17,6 @@ RSpec.describe Purchase, type: :model do
       expect(@purchase).to_not be_valid
     end
 
-
     it 'cannot be created without an amount' do
       @purchase.amount = nil
       expect(@purchase).to_not be_valid

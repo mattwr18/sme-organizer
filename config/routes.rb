@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   resources :clients
   resources :products
   resources :vendors
+  resources :ingredients
   get '/profit' => 'profit#index'
+  get '/sales/product/:id' => 'sales#sales_by_product'
 end

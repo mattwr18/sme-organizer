@@ -2,6 +2,9 @@
   <td><%= product.id %></td>
   <td><%= product.name %></td>
   <td><%= product.created_at.strftime("%d/%m/%Y") %></td>
+  <td><% if product.ingredients %><%= link_to 'Ingredients', ingredients_path, class: 'btn btn-primary' %><% end %></td>
+  <div class="container">
+  </div>
   <td><%= link_to 'Show', product_path(product) %></td>
   <td >
     <%= link_to 'Edit', edit_product_path(product), id: "edit_#{product.id}", class: "fa fa-pencil i fa-2x index_icons" %>

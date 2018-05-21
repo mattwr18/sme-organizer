@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VendorsController < ApplicationController
   before_action :set_vendor, only: %i[edit update show destroy]
 

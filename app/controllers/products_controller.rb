@@ -48,6 +48,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, ingredients_attributes: %i[name amount amount_type])
+    params.require(:product).permit(:name, ingredients_attributes: %i[name amount amount_type], sale_ids: [])
   end
 end

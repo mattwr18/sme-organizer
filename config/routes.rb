@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'products_sales/index'
+  get 'products_sales/show'
   devise_for :users
   root to: 'homepage#index'
 
@@ -10,6 +12,6 @@ Rails.application.routes.draw do
   resources :products
   resources :vendors
   resources :ingredients
+  resources :products_sales, only: [:index, :show]
   get '/profit' => 'profit#index'
-  get '/sales/product/:id' => 'sales#sales_by_product'
 end

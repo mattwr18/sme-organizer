@@ -1,0 +1,11 @@
+<% @sales.each do |s| %>
+  <% if s.product_ids.include? @product.id  %>
+      <tr>
+        <td><%= s.id %></td>
+        <td><%= s.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= s.client %></td>
+        <td><%= s.amount %></td>
+        <td><%= s.description %></td>
+      </tr>
+  <% end %>
+<% end %>

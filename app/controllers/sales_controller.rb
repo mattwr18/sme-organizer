@@ -15,7 +15,7 @@ class SalesController < ApplicationController
 
   def edit
     @products = Product.products_by(current_user)
-   end
+  end
 
   def create
     @sale = Sale.new(sale_params)

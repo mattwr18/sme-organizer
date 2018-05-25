@@ -5,5 +5,6 @@ FactoryBot.define do
     name 'MyString'
     amount 1
     amount_type 'MyString'
+    user
   end
 end

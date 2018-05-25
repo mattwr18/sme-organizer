@@ -75,14 +75,14 @@ describe 'navigation' do
       fill_in 'sale[amount]', with: 10
       fill_in 'sale[description]', with: 'Anything'
 
-      expect { click_on 'Save' }.to change(Sale, :count).by(1)
+      expect { click_on 'Create Sale' }.to change(Sale, :count).by(1)
     end
 
     it 'will have a user associated with it' do
       select 'Aarya', from: :sale_client, visible: false
       fill_in 'sale[amount]', with: 11
       fill_in 'sale[description]', with: 'User associated'
-      click_on 'Save'
+      click_on 'Create Sale'
 
       expect(User.last.sales.last.description).to eq('User associated')
     end
@@ -95,7 +95,7 @@ describe 'navigation' do
       fill_in 'sale[amount]', with: 11
       fill_in 'sale[description]', with: 'Edited sale'
 
-      click_on 'Save'
+      click_on 'Update Sale'
 
       expect(page).to have_content(/Edited sale/)
     end

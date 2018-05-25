@@ -12,6 +12,8 @@
 //
 //= require jquery3
 //= require rails-ujs
+//= require jquery-ui
+//= require select2-full
 //= require jquery-ui/effect.all
 //= require popper
 //= require bootstrap-sprockets

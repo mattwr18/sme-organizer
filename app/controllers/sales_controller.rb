@@ -42,6 +42,14 @@ class SalesController < ApplicationController
     redirect_to sales_path, notice: 'Sale was successfully deleted'
   end
 
+  def products_search
+    @products = Product.products_by(current_user).where('name LIKE ?', "%#{params[:q]}%")
+
+    respond_to do |format|
+      format.json { render json: @products.map { |p| { id: p.id, name: p.name } } }
+    end
+  end
+
   private
 
   def set_sale
@@ -49,6 +57,6 @@ class SalesController < ApplicationController
   end
 
   def sale_params
-    params.require(:sale).permit(:amount, :description, :client, :quantity, product_ids: [])
+    params.require(:sale).permit(:amount, :description, :client, :quantity, products_attributes: :name, product_ids: [])
   end
 end

@@ -41,6 +41,14 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: 'Product was successfully deleted'
   end
 
+  def ingredients_search
+    @ingredients = Ingredient.all.where('name LIKE ?', "%#{params[:q]}%")
+
+    respond_to do |format|
+      format.json { render json: @ingredients.map { |p| { id: p.id, name: p.name } } }
+    end
+  end
+
   private
 
   def set_product
@@ -48,6 +56,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, ingredients_attributes: %i[name amount amount_type], sale_ids: [])
+    params.require(:product).permit(:name, ingredients_attributes: %i[name amount amount_type], sale_ids: [], ingredient_ids: [])
   end
 end

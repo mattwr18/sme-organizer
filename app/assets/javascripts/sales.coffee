@@ -3,9 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery(document).on 'turbolinks:load', ->
+  # console.log 'create.js.erb'
+  # $('.product-buttons').click ->
+  #   $('#sale-amount').html '<%= product.price %>@sale.amount'
+
   $('.select2-field').select2
     theme: 'bootstrap'
-    minimumInputLength: 1
     maximumInputLength: 20
     ajax:
       url: $('.select2-field').data('endpoint')

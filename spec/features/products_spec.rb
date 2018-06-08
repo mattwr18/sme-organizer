@@ -64,32 +64,30 @@ describe 'navigation' do
     end
 
     it 'has nested forms for Ingredients' do
-      expect(page).to have_field(:product_ingredients_attributes_0_name)
+      expect(page).to have_field(:product_ingredient_ids)
       expect(page).to have_field(:product_ingredients_attributes_0_amount)
       expect(page).to have_field(:product_ingredients_attributes_0_amount_type)
     end
 
     it 'allows product creation with ingredients' do
       fill_in :product_name, with: 'Product name'
-      fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
       fill_in :product_ingredients_attributes_0_amount, with: 150
       select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
 
-      expect { click_on 'Save' }.to change(Product, :count).by(1)
+      expect { click_on 'Create Product' }.to change(Product, :count).by(1)
     end
 
     it 'allows ingredient creation with prodcuts' do
       fill_in 'Name', with: 'Product'
-      fill_in :product_ingredients_attributes_0_name, with: 'Ingredient1'
       fill_in :product_ingredients_attributes_0_amount, with: 150
       select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
 
-      expect { click_on 'Save' }.to change(Ingredient, :count).by(1)
+      expect { click_on 'Create Product' }.to change(Ingredient, :count).by(1)
     end
 
     it 'allows product creation without ingredients' do
       fill_in 'product[name]', with: 10
-      expect { click_on 'Save' }.to change(Product, :count).by(1)
+      expect { click_on 'Create Product' }.to change(Product, :count).by(1)
     end
 
     context 'more than one indgredient to add', js: true do
@@ -102,8 +100,12 @@ describe 'navigation' do
       end
 
       it 'can be created with more than one ingredient' do
+        product_with_ingredient = FactoryBot.create(:product_with_ingredient)
+        visit new_product_path
         fill_in :product_name, with: 'Product name'
-        fill_in :product_ingredients_attributes_0_name, with: 'Ingredient name'
+        find('.select2-search').click
+        wait_for_ajax
+        select 'FactoryBot ingredient', from: '.select2-search'
         fill_in :product_ingredients_attributes_0_amount, with: 150
         select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
         click_on 'Add ingredient'
@@ -122,13 +124,12 @@ describe 'navigation' do
           find('.ingredient_amount_type_field').set('gram(s)')
         end
 
-        expect { click_on 'Save' }.to change(Product, :count).by(1)
+        expect { click_on 'Create Product' }.to change(Product, :count).by(1)
       end
 
       it 'allows selection of previously used ingredients' do
         ingredient1 = FactoryBot.create(:ingredient)
         visit new_product_path
-        select 'MyString', from: :product_ingredients_attributes_0_products
       end
     end
 
@@ -138,7 +139,7 @@ describe 'navigation' do
       visit new_product_path
 
       fill_in 'product[name]', with: 'User associated'
-      click_on 'Save'
+      click_on 'Create Product'
 
       expect(User.last.products.last.name).to eq('User associated')
     end
@@ -151,7 +152,7 @@ describe 'navigation' do
 
     it 'can be edited' do
       fill_in 'product[name]', with: 'Edited product'
-      click_on 'Save'
+      click_on 'Update Product'
       expect(page).to have_content(/Edited product/)
     end
 
@@ -163,7 +164,7 @@ describe 'navigation' do
           find('.ingredient_name_field').set('Edited ingredient name')
         end
 
-        click_on 'Save'
+        click_on 'Update Product'
         expect(page).to have_content(/Edited ingredient name/)
       end
 
@@ -171,11 +172,11 @@ describe 'navigation' do
         product_with_ingredient = FactoryBot.create(:product_with_ingredient)
         visit edit_product_path(product_with_ingredient)
 
-        within ('.nested-fields:nth-child(1)') do
+        within ('.nested-fields:nth-child(2)') do
           find('.ingredient_name_field').set('Edited ingredient name')
         end
 
-        click_on 'Save'
+        click_on 'Update Product'
         expect(page).to have_content(/Edited ingredient name/)
       end
     end
@@ -202,7 +203,7 @@ describe 'navigation' do
       product_with_ingredient_to_delete = FactoryBot.create(:product_with_ingredient, user_id: @delete_user.id)
       visit edit_product_path(product_with_ingredient_to_delete)
 
-      check 'Product with ingredient'
+      check 'remove ingredient'
     end
   end
 end

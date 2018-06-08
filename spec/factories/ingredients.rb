@@ -2,9 +2,8 @@
 
 FactoryBot.define do
   factory :ingredient do
-    name 'MyString'
+    name 'FactoryBot ingredient'
     amount 1
     amount_type 'MyString'
-    user
   end
 end

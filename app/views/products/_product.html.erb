@@ -1,6 +1,7 @@
 <tr>
   <td><%= product.id %></td>
   <td><%= product.name %></td>
+  <td><%= product.price %></td>
   <td><%= product.created_at.strftime("%d/%m/%Y") %></td>
   <td><%= link_to 'Sales', products_sale_path(product), class: 'btn btn-primary' %></td>
   <div class="container">

@@ -4,13 +4,15 @@ class SalesController < ApplicationController
   before_action :set_sale, only: %i[edit update show destroy]
 
   def index
-    @sales = Sale.sales_by(current_user).order(created_at: :desc).page(params[:page]).per(10)
+    @sales = Sale.sales_by(current_user).order(created_at: :desc)
+                 .page(params[:page]).per(10)
   end
 
   def show; end
 
   def new
     @sale = Sale.new
+    @products = Product.products_by(current_user)
   end
 
   def edit
@@ -18,7 +20,9 @@ class SalesController < ApplicationController
   end
 
   def create
+    @sale_product_ids = params[:sale][:product_ids].split(',').map(&:to_i)
     @sale = Sale.new(sale_params)
+    @sale.product_ids = @sale_product_ids
     @sale.user_id = current_user.id
 
     if @sale.save
@@ -57,6 +61,7 @@ class SalesController < ApplicationController
   end
 
   def sale_params
-    params.require(:sale).permit(:amount, :description, :client, :quantity, products_attributes: :name, product_ids: [])
+    params.require(:sale).permit(:amount, :description, :client,
+                                 product_ids: [])
   end
 end

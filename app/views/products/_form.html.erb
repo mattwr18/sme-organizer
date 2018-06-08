@@ -2,11 +2,15 @@
 
 <%= simple_form_for @product, html: { role: 'form', id: 'product_form' } do |f| %>
   <%= f.input :name, class: "col-sm-2 control-label" %>
-  <%= f.fields_for :ingredients do |ingredient| %>
-    <%= f.association :ingredients, input_html: { 'data-endpoint': ingredients_search_products_path, class: 'select2-field ingredient-field-name' } %><br>
-    <%= render 'ingredient_fields', f: ingredient %>
-  <% end %>
+  <%= f.input :price %>
+    <%= f.simple_fields_for :ingredients do |ingredient| %>
+      <%= render 'ingredient_fields', f: ingredient %>
+    <% end %>
+
+
+<div id="add_ingredients">
   <%= link_to_add_association 'Add ingredient', f, :ingredients, class: "btn btn-block btn-primary" %><br>
   <%= f.button :submit, class: "btn btn-success btn-block" %><br>
   <%= link_to 'Back', products_path, class: "btn btn-block btn-info" %><br>
 <% end %>
+</div>

@@ -11,6 +11,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'support/factory_bot'
+require 'support/wait_for_ajax'
 
 include Warden::Test::Helpers
 Warden.test_mode!
@@ -21,6 +22,7 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
   config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include WaitForAjax, type: :feature
 
   config.before(:suite) do
     if config.use_transactional_fixtures?

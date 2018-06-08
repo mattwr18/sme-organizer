@@ -1,12 +1,25 @@
 <%= render 'shared/errors', object: @sale %>
+<% product_array = Product.products_by(current_user) %>
 
+<div class="container-fluid">
 <%= simple_form_for @sale do |f| %>
   <%= f.input :client, collection: Client.clients_by(current_user).collect(&:name) %>
-  <%= f.association :products, input_html: { 'data-endpoint': products_search_sales_path, class: 'select2-field' }%>
-  <%= f.input :quantity %>
-  <%= f.input :amount %>
+  <div class="row">
+    <% Product.all.each do |product| %>
+      <%= link_to "Add #{product.name}", product_search_path(product.id),
+                                           remote: true, class: "btn btn-info product-buttons product-#{product.id}" %>
+      <!-- <button type="button" name="button" class="btn btn-info product-buttons product-<%= product.id %>"><%= "Add #{product.name}" %></button> -->
+    <% end %>
+  </div>
+  <div class="products">
+    <%= f.hidden_field :product_ids, value: false, class: 'sale-products-id' %>
+  </div>
+  <%= f.label :amount %>
+  <%= f.number_field :amount, id: 'sale-amount' %>
   <%= f.input :description %>
   <%= f.button :submit, class: 'btn btn-block btn-primary links' %>
 <% end %>
+</div>
 
 <%= link_to 'Back', sales_path, class: "btn btn-block btn-info" %>
+<%= render partial: 'jscript', formats: [:js], locals: { product_array: product_array } %>

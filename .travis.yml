@@ -19,6 +19,7 @@ script:
 - RAILS_ENV=test bundle exec rails db:migrate --trace
 - bundle exec rails db:test:prepare
 - bundle exec rspec spec/
+- bundle exec rake assets:precompile
 deploy:
   provider: heroku
   api_key:

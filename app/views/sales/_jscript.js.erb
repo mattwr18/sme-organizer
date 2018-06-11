@@ -4,7 +4,7 @@
   var products = [];
   $(".product-<%= product.id %>").click(function() {
     var updatedTotal = total += parseInt("<%= product.price %>");
-    $("#sale-amount").val(updatedTotal);
+    $("#sale-amount").attr('value', updatedTotal);
     products.push(parseInt("<%= product.id %>"));
     $("input#sale_product_ids").val(products);
   });

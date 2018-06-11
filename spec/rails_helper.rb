@@ -65,6 +65,12 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.after do |example|
+    if example.metadata[:type] == :feature and example.exception.present?
+      save_and_open_page
+    end
+  end
+  
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 end

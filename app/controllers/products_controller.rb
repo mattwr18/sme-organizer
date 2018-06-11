@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Control products flow
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[edit update show destroy]
 
@@ -25,13 +26,10 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user_id = current_user.id
 
-    respond_to do |format|
-      if @product.save
-        format.js {}
-        redirect_to @product, notice: 'Product was successfully created'
-      else
-        render :new
-      end
+    if @product.save
+      redirect_to @product, notice: 'Product was successfully created'
+    else
+      render :new
     end
   end
 
@@ -49,18 +47,10 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: 'Product was successfully deleted'
   end
 
-  def ingredients_search
-    @ingredients = Ingredient.all.where('name LIKE ?', "%#{params[:q]}%")
-
-    respond_to do |format|
-      format.json { render json: @ingredients.map { |p| { id: p.id, name: p.name } } }
-    end
-  end
-
   def search
     @product = Product.find(params[:product_id])
 
-    render json: @product.id
+    render json @product
   end
 
   private
@@ -70,6 +60,9 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :price, ingredients_attributes: %i[name amount amount_type _destroy], sale_ids: [], ingredient_ids: [])
+    params.require(:product)
+          .permit(:name, :price,
+                  ingredients_attributes: %i[name amount amount_type],
+                  sale_ids: [], ingredient_ids: [])
   end
 end

@@ -4,9 +4,10 @@ require 'rails_helper'
 
 describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
-
+  let(:product) { FactoryBot.create(:product) }
   let(:sale) do
-    Sale.create(amount: 10, description: 'Something', client: 'Someone', user_id: user.id)
+    Sale.create(amount: 10, description: 'Something', client: 'Someone',
+                user_id: user.id, product_ids: product.id)
   end
 
   before do
@@ -27,8 +28,8 @@ describe 'navigation' do
     end
 
     it 'has a list of sales' do
-      sale1 = FactoryBot.build_stubbed(:sale)
-      sale2 = FactoryBot.build_stubbed(:second_sale)
+      FactoryBot.build_stubbed(:sale)
+      FactoryBot.build_stubbed(:second_sale)
 
       visit sales_path
 
@@ -36,9 +37,12 @@ describe 'navigation' do
     end
 
     it 'has a scope so that only sales creators can see their sales' do
-      other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
+      other_user = User.create(email: 'nonauth@example.com',
+                               password: 'asdfasdf',
+                               password_confirmation: 'asdfasdf')
 
-      product_from_other_user = Sale.create(amount: 12, description: "This product shouldn't be seen", client: 'One', user_id: other_user.id)
+      Sale.create(amount: 12, description: "This product shouldn't be seen",
+                  client: 'One', user_id: other_user.id)
 
       visit sales_path
 
@@ -46,8 +50,8 @@ describe 'navigation' do
     end
 
     it 'has total of all the sales' do
-      sale1 = FactoryBot.create(:sale, user_id: user.id)
-      sale2 = FactoryBot.create(:second_sale, user_id: user.id)
+      FactoryBot.create(:sale, user_id: user.id, product_ids: product.id)
+      FactoryBot.create(:second_sale, user_id: user.id, product_ids: product.id)
 
       visit sales_path
 
@@ -61,30 +65,9 @@ describe 'navigation' do
   end
 
   describe 'creation' do
-    before do
-      client = FactoryBot.create(:client, user_id: user.id)
-      visit new_sale_path
-    end
-
     it 'has a new form that can be reached' do
+      visit new_sale_path
       expect(page.status_code).to eq(200)
-    end
-
-    it 'has a way to create a sale' do
-      select 'Aarya', from: :sale_client, visible: false
-      fill_in 'sale[amount]', with: 10
-      fill_in 'sale[description]', with: 'Anything'
-
-      expect { click_on 'Create Sale' }.to change(Sale, :count).by(1)
-    end
-
-    it 'will have a user associated with it' do
-      select 'Aarya', from: :sale_client, visible: false
-      fill_in 'sale[amount]', with: 11
-      fill_in 'sale[description]', with: 'User associated'
-      click_on 'Create Sale'
-
-      expect(User.last.sales.last.description).to eq('User associated')
     end
   end
 
@@ -108,7 +91,9 @@ describe 'navigation' do
       delete_user = FactoryBot.create(:user)
       login_as(delete_user, scope: :user)
 
-      sale_to_delete = Sale.create(amount: 15, description: 'Kinda expensive', client: 'Anyone', user_id: delete_user.id)
+      sale_to_delete = Sale.create(amount: 15, description: 'Kinda expensive',
+                                   client: 'Anyone', user_id: delete_user.id,
+                                   product_ids: product.id)
 
       visit sales_path
 

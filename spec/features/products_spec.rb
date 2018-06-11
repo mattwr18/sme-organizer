@@ -64,7 +64,7 @@ describe 'navigation' do
     end
 
     it 'has nested forms for Ingredients' do
-      expect(page).to have_field(:product_ingredient_ids)
+      expect(page).to have_field(:product_ingredients_attributes_0_name)
       expect(page).to have_field(:product_ingredients_attributes_0_amount)
       expect(page).to have_field(:product_ingredients_attributes_0_amount_type)
     end
@@ -94,37 +94,7 @@ describe 'navigation' do
       it 'has a way to add more ingredient forms' do
         click_on 'Add ingredient'
 
-        within ('.nested-fields:nth-child(2)') do
-          expect(page).to have_content('Ingredient')
-        end
-      end
-
-      it 'can be created with more than one ingredient' do
-        product_with_ingredient = FactoryBot.create(:product_with_ingredient)
-        visit new_product_path
-        fill_in :product_name, with: 'Product name'
-        find('.select2-search').click
-        wait_for_ajax
-        select 'FactoryBot ingredient', from: '.select2-search'
-        fill_in :product_ingredients_attributes_0_amount, with: 150
-        select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
-        click_on 'Add ingredient'
-
-        within ('.nested-fields:nth-child(2)') do
-          find('.ingredient_name_field').set('Ingredient2')
-          find('.ingredient_amount_field').set(160)
-          find('.ingredient_amount_type_field').set('gram(s)')
-        end
-
-        click_on 'Add ingredient'
-
-        within ('.nested-fields:nth-child(3)') do
-          find('.ingredient_name_field').set('Ingredient3')
-          find('.ingredient_amount_field').set(1600)
-          find('.ingredient_amount_type_field').set('gram(s)')
-        end
-
-        expect { click_on 'Create Product' }.to change(Product, :count).by(1)
+        expect(page).to have_css('input', count: 5)
       end
 
       it 'allows selection of previously used ingredients' do
@@ -158,26 +128,26 @@ describe 'navigation' do
 
     context 'editing ingredients', js: true do
       it 'allows an ingredient to be added later' do
+        FactoryBot.create(:ingredient)
+        visit edit_product_path(product)
         click_on 'Add ingredient'
 
-        within ('.nested-fields:nth-child(1)') do
-          find('.ingredient_name_field').set('Edited ingredient name')
+        within ('.nested-fields') do
+          select 'FactoryBot ingredient', from: 'Ingredient'
         end
 
         click_on 'Update Product'
-        expect(page).to have_content(/Edited ingredient name/)
+        expect(page).to have_content(/FactoryBot ingredient/)
       end
 
       it 'allows editing of ingredients' do
         product_with_ingredient = FactoryBot.create(:product_with_ingredient)
-        visit edit_product_path(product_with_ingredient)
 
-        within ('.nested-fields:nth-child(2)') do
-          find('.ingredient_name_field').set('Edited ingredient name')
-        end
+        visit edit_product_path(product_with_ingredient)
+        fill_in 'product_ingredients_attributes_0_amount', with: 100
 
         click_on 'Update Product'
-        expect(page).to have_content(/Edited ingredient name/)
+        expect(page).to have_content(/100/)
       end
     end
   end
@@ -197,13 +167,6 @@ describe 'navigation' do
       click_link("delete_product_#{product_to_delete.id}_from_index")
 
       expect(page.status_code).to eq(200)
-    end
-
-    it 'allows deletion of ingredients' do
-      product_with_ingredient_to_delete = FactoryBot.create(:product_with_ingredient, user_id: @delete_user.id)
-      visit edit_product_path(product_with_ingredient_to_delete)
-
-      check 'remove ingredient'
     end
   end
 end

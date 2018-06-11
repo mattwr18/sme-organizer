@@ -17,4 +17,15 @@ RSpec.describe Product, type: :model do
       expect(@product).to_not be_valid
     end
   end
+
+  describe 'deletion' do
+    before do
+      @product = FactoryBot.create(:second_product)
+    end
+
+    it 'can be deleted' do
+      @product.destroy
+      assert @product.delete 
+    end
+  end
 end

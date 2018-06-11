@@ -6,8 +6,7 @@
     var updatedTotal = total += parseInt("<%= product.price %>");
     $("#sale-amount").val(updatedTotal);
     products.push(parseInt("<%= product.id %>"));
-    console.log(products)
-    $("input#sale_product_ids").attr('value', products).trigger("change");
+    $("input#sale_product_ids").val(products);
   });
   <% end %>
 </script>

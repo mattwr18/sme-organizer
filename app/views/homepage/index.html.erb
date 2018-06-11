@@ -2,9 +2,9 @@
 <div class="container">
   <div class="jumbotron">
     <h2>Your small or medium enterprise organizer</h2>
-    <h2>Total sales: <%= @sales.sum(:amount) %><br></h2>
-    <h2>Total purchases: <%= @purchases.sum(:amount) %><br></h2>
-    <h2>Profit: <%= @profit %></h2><br>
+    <h2>Total sales: <%= number_to_currency @sales.sum(:amount) %><br></h2>
+    <h2>Total purchases: <%= number_to_currency @purchases.sum(:amount) %><br></h2>
+    <h2>Profit: <%= number_to_currency @profit %></h2><br>
     <div class="row">
       <div class="col-md-12 text-center">
         <%= link_to 'Add sale', new_sale_path, class: "btn btn-block btn-dark links" %>

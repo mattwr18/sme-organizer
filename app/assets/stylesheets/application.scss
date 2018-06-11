@@ -2,8 +2,12 @@
 @import 'select2';
 @import 'select2-bootstrap';
 
-.links {
-  margin: 15px 0;
+.create-btn {
+  margin: 15px;
+}
+
+h1 {
+  margin: 10px;
 }
 
 .product-buttons {
@@ -12,4 +16,8 @@
 
 .products-list {
   margin: 20px;
+}
+
+.btn-block {
+  margin: 15px 0;
 }

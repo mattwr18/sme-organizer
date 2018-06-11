@@ -14,6 +14,7 @@ class SalesController < ApplicationController
   def new
     @sale = Sale.new
     @products = Product.products_by(current_user)
+    @clients = Client.clients_by(current_user)
   end
 
   def edit

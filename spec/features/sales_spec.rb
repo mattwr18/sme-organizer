@@ -55,7 +55,7 @@ describe 'navigation' do
 
       visit sales_path
 
-      expect(page).to have_content(/Total sales: 21/)
+      expect(page).to have_content("Total sales: $21.00")
     end
 
     it 'has a link from the sales page' do

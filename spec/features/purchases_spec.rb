@@ -51,7 +51,7 @@ describe 'navigation' do
 
       visit purchases_path
 
-      expect(page).to have_content(/Total purchases: 35/)
+      expect(page).to have_content("Total purchases: $35.00")
     end
   end
 

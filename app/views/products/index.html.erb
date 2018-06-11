@@ -1,7 +1,14 @@
-<div class="container">
-  <h1>Products</h1>
+<div class='container'>
+  <div class='row'>
+    <div class='col-xs-4'>
+      <h1>Products</h1>
+    </div>
+    <div class='col-xs-8'>
+      <%= link_to 'Create a new product', new_product_path, class: 'btn btn-info create-btn' %>
+    </div>
+  </div>
 </div>
-<table class="table table-hover table-bordered">
+<table class='table table-hover table-bordered'>
   <thead>
     <tr>
       <th>Id</th>
@@ -12,10 +19,7 @@
       <th>Ingredients</th>
     </tr>
   </thead>
-  <tbody id="products">
+  <tbody id='products'>
     <%= render @products %>
   </tbody>
 </table>
-<div class="container">
-  <%= link_to 'Create a new product', new_product_path, class: "btn btn-block btn-info links"%>
-</div>

@@ -13,17 +13,14 @@ class SalesController < ApplicationController
 
   def new
     @sale = Sale.new
-    @products = Product.products_by(current_user)
-    @clients = Client.clients_by(current_user)
   end
 
-  def edit
-    @products = Product.products_by(current_user)
-  end
+  def edit; end
 
   def create
     @sale = Sale.new(sale_params)
     @sale_product_ids = params[:sale][:product_ids].split(',').map(&:to_i)
+                                                   .reject(&:zero?)
     @sale.product_ids = @sale_product_ids
     @sale.user_id = current_user.id
 

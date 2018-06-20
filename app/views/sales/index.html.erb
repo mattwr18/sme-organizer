@@ -1,22 +1,22 @@
 <div class='container'>
   <div class='row'>
     <div class='col-xs-4'>
-      <h1>Sales</h1>
+      <h1><%= t('index.title.sales') %></h1>
     </div>
     <div class='col-xs-8'>
-      <%= link_to 'Create a new sale', new_sale_path, class: 'btn btn-info create-btn'%>
+      <%= link_to t('index.create_button.sales'), new_sale_path, class: 'btn btn-info create-btn'%>
     </div>
   </div>
 </div>
 <table class='table table-hover table-bordered'>
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Date</th>
-      <th>Client</th>
-      <th>Products</th>
-      <th>Total</th>
-      <th>Description</th>
+      <th><%= t('index.table.id') %></th>
+      <th><%= t('index.table.date') %></th>
+      <th><%= t('index.table.client') %></th>
+      <th><%= t('index.table.products') %></th>
+      <th><%= t('index.table.total') %></th>
+      <th><%= t('index.table.description') %></th>
     </tr>
   </thead>
   <tbody id='sales'>
@@ -27,5 +27,5 @@
 <%= paginate @sales, theme: 'twitter-bootstrap-4' %>
 
 <div class='container'>
-  <h2>Total sales: <%= number_to_currency @sales.sum(:amount) %></h2>
+  <h2><%= t('index.totals.sales') %> <%= number_to_currency @sales.sum(:amount) %></h2>
 </div>

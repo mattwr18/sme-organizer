@@ -11,27 +11,33 @@
 
 <body>
   <% if user_signed_in? %>
-    <ul class="nav nav-tabs justify-content-end">
-      <li class="nav-item">
+    <ul class="nav nav-tabs justify-content-between">
+      <li class="navbar-brand flags">
+        <%= link_to_unless_current flag_icon(:br), { locale: 'pt-BR' } %>
+      </li>
+      <li class="navbar-brand">
+        <%= link_to_unless_current flag_icon(:us), { locale: :en }%>
+      </li>
+      <li class="nav-item ml-auto">
         <%= active_link_to 'Home', root_path, active: :exclusive, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= active_link_to 'Sales', sales_path, active: :exclusive, class: "nav-link" %>
+        <%= active_link_to t('navbar.sales'), sales_path, active: :exclusive, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= active_link_to 'Purchases', purchases_path, active: :exclusive, class: "nav-link" %>
+        <%= active_link_to t('navbar.purchases'), purchases_path, active: :exclusive, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= active_link_to 'Products', products_path, active: :exclusive, class: "nav-link" %>
+        <%= active_link_to t('navbar.products'), products_path, active: :exclusive, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= active_link_to 'Clients', clients_path, active: :exclusive, class: "nav-link" %>
+        <%= active_link_to t('navbar.clients'), clients_path, active: :exclusive, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= active_link_to 'Vendors', vendors_path, active: :exclusive, class: "nav-link" %>
+        <%= active_link_to t('navbar.vendors'), vendors_path, active: :exclusive, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= active_link_to "Logout", destroy_user_session_path, active: :exclusive, method: :delete, class: 'nav-link'  %>
+        <%= active_link_to t('navbar.log_out'), destroy_user_session_path, active: :exclusive, method: :delete, class: 'nav-link'  %>
       </li>
     </ul>
   <% end %>

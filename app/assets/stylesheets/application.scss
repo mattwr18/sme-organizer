@@ -1,7 +1,11 @@
 @import "bootstrap";
 @import 'select2';
 @import 'select2-bootstrap';
+@import 'flag-icon-sass';
 
+.flags {
+  margin-left: 15px;
+}
 .create-btn {
   margin: 15px;
 }

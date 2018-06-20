@@ -1,20 +1,20 @@
 <div class='container'>
   <div class='row'>
     <div class='col-xs-4'>
-      <h1>Vendors</h1>
+      <h1><%= t('index.title.vendors') %></h1>
     </div>
     <div class='col-xs-8'>
-      <%= link_to 'Create a new vendor', new_vendor_path, class: 'btn btn-info create-btn' %>
+      <%= link_to t('index.create_button.vendors'), new_vendor_path, class: 'btn btn-info create-btn' %>
     </div>
   </div>
 </div>
 <table class='table table-hover table-bordered'>
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Phone number</th>
-      <th>Observation</th>
+      <th><%= t('index.table.id') %></th>
+      <th><%= t('index.table.name') %></th>
+      <th><%= t('index.table.phone_number') %></th>
+      <th><%= t('index.table.obs') %></th>
     </tr>
   </thead>
   <tbody id='vendors'>

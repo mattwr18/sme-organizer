@@ -1,22 +1,22 @@
 <div class='container'>
   <div class='row'>
     <div class='col-xs-4'>
-      <h1>Products</h1>
+      <h1><%= t('index.title.products') %></h1>
     </div>
     <div class='col-xs-8'>
-      <%= link_to 'Create a new product', new_product_path, class: 'btn btn-info create-btn' %>
+      <%= link_to t('index.create_button.products'), new_product_path, class: 'btn btn-info create-btn' %>
     </div>
   </div>
 </div>
 <table class='table table-hover table-bordered'>
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Date</th>
-      <th>Sales</th>
-      <th>Ingredients</th>
+      <th><%= t('index.table.id') %></th>
+      <th><%= t('index.table.name') %></th>
+      <th><%= t('index.table.price') %></th>
+      <th><%= t('index.table.date') %></th>
+      <th><%= t('index.table.sales') %></th>
+      <th><%= t('index.table.ingredients') %></th>
     </tr>
   </thead>
   <tbody id='products'>

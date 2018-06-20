@@ -3,7 +3,7 @@
   <td><%= vendor.name %></td>
   <td><%= vendor.phone_number %></td>
   <td><%= vendor.obs %></td>
-  <td><%= link_to 'Show', vendor_path(vendor) %></td>
-  <td ><%= link_to 'Edit', edit_vendor_path(vendor), id: "edit_#{vendor.id}", class: "fa fa-pencil i fa-2x index_icons" %></td>
-  <td ><%= link_to 'Delete', vendor_path(vendor), method: :delete, id: "delete_vendor_#{vendor.id}_from_index", class: "fa fa-trash-o fa-2x index_icons", data: { confirm: "Are you sure?"} %></td>
+  <td><%= link_to t('index.links.show'), vendor_path(vendor) %></td>
+  <td ><%= link_to t('index.links.edit'), edit_vendor_path(vendor), id: "edit_#{vendor.id}", class: "fa fa-pencil i fa-2x index_icons" %></td>
+  <td ><%= link_to t('index.links.delete'), vendor_path(vendor), method: :delete, id: "delete_vendor_#{vendor.id}_from_index", class: "fa fa-trash-o fa-2x index_icons", data: { confirm: "Are you sure?"} %></td>
 </tr>

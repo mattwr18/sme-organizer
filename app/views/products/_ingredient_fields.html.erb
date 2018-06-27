@@ -1,5 +1,5 @@
 <div class='nested-fields'>
-  <%= f.input :name, label: 'Ingredient', collection: Ingredient.all.collect(&:name).reject(&:blank?).uniq %>
-  <%= f.input :amount %>
-  <%= f.input :amount_type, collection: ['gram(s)', 'kilo(s)', 'liter(s)', 'millilter(s)'], class: "ingredient_field_amount_type" %>
+  <%= f.input :name, label: I18n.t('simple_form.labels.ingredient'), collection: Ingredient.all.collect(&:name).reject(&:blank?).uniq %>
+  <%= f.input :amount, label: I18n.t('simple_form.labels.amount') %>
+  <%= f.input :amount_type, label: I18n.t('simple_form.labels.amount_type'), collection: ['gram(s)', 'kilo(s)', 'liter(s)', 'millilter(s)'], class: "ingredient_field_amount_type" %>
 </div>

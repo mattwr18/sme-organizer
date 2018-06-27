@@ -1,18 +1,18 @@
-en:
+pt-BR:
   simple_form:
     labels:
-      password: "Password"
-      remember_me: "Remember me"
-      log_in: "Log in"
-      name: "Name"
-      price: "Price"
-      ingredient: "Ingredient"
-      amount: "Amount"
-      amount_type: "Amount type"
-      add_ingredient: "Add Ingredient"
-      create_product: "Create Product"
-      client: "Client"
-      description: "Description"
+      password: "Senha"
+      remember_me: "Lembre de mim"
+      log_in: "Entrar"
+      name: "Nome"
+      price: "Preço"
+      ingredient: "Ingrediente"
+      amount: "Quantidade"
+      amount_type: "Tipo de medidas"
+      add_ingredient: "Adicione Ingrediente"
+      create_product: "Criar Produto"
+      client: "Cliente"
+      description: "Descrição"
     "yes": 'Yes'
     "no": 'No'
     required:

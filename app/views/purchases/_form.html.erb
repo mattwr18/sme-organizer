@@ -7,12 +7,12 @@
 </div>
 
 <div class='form-group'>
-  <%= f.label :amount, class: 'col-sm-2 control-label' %>
+  <%= f.label t 'simple_form.labels.amount', class: 'col-sm-2 control-label' %>
   <%= f.text_field :amount, class: 'form-control' %>
 </div>
 
 <div class='form-group'>
-  <%= f.label :description, class: 'col-sm-2 control-label' %>
+  <%= f.label t 'simple_form.labels.description', class: 'col-sm-2 control-label' %>
   <%= f.text_area :description, class: 'form-control' %>
 </div>
 
@@ -20,4 +20,4 @@
 
 <% end %>
 
-<%= link_to 'Back', purchases_path, class: 'btn btn-block btn-info' %>
+<%= link_to (t 'shared.back'), purchases_path, class: 'btn btn-block btn-info' %>

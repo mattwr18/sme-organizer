@@ -49,6 +49,10 @@
     totals:
       sales: "Total:"
       purchases: "Total:"
+  form:
+    new_sale: "Nova Venda"
+  shared:
+    back: "Volta"
   date:
     abbr_day_names:
     - Dom

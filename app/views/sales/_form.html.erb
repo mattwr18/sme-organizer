@@ -5,7 +5,7 @@
 <div class='container-fluid'>
 <%= simple_form_for @sale do |f| %>
   <% if client_array.present? %>
-    <%= f.input :client, collection: Client.clients_by(current_user).collect(&:name) %>
+    <%= f.input :client, label: I18n.t('simple_form.labels.client'), collection: Client.clients_by(current_user).collect(&:name) %>
   <% else %>
     <%= link_to 'Add client', new_client_path, class: 'btn btn-info create-btn' %>
   <% end %>
@@ -19,18 +19,18 @@
     </div>
   <% else %>
     <h3 class='alert-warning'>Sales cannot be created without a product.</h3>
-    <%= link_to 'Create product', new_product_path, class: 'btn btn-info create-btn' %>
+    <%= link_to (t 'index.create_button.product'), new_product_path, class: 'btn btn-info create-btn' %>
   <% end %>
   <div class='products'>
     <%= f.hidden_field :product_ids, value: false, class: 'sale-products-id' %>
   </div>
-  <%= f.label :amount %>
+  <%= f.label t 'simple_form.labels.amount' %>
   <%= f.number_field :amount, id: 'sale-amount' %>
-  <%= f.input :description %>
+  <%= f.input :description, label: I18n.t('simple_form.labels.description') %>
   <%= f.button :submit, class: 'btn btn-block btn-primary' %>
 <% end %>
 </div>
 <%= render partial: 'jscript', formats: [:js], locals: { product_array: product_array } %>
 <div class='container'>
-  <%= link_to 'Back', sales_path, class: 'btn btn-block btn-info' %>
+  <%= link_to (t 'shared.back'), sales_path, class: 'btn btn-block btn-info' %>
 </div>

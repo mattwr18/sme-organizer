@@ -49,6 +49,10 @@ en:
     totals:
       sales: "Total sales:"
       purchases: "Total purchases:"
+  form:
+    new_sale: "New Sale"
+  shared:
+    back: "Back"
   date:
     abbr_day_names:
     - Sun

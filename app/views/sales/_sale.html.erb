@@ -1,6 +1,10 @@
 <tr>
   <td><%= sale.id %></td>
-  <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
+  <% if sale.date_of_sale.present? %>
+    <td><%= sale.date_of_sale.strftime("%d/%m/%Y") %></td>
+  <% else %>
+    <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
+  <% end %>
   <td><%= sale.client %></td>
   <td>
     <% sale.products.each do |product| %>

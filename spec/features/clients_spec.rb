@@ -79,13 +79,13 @@ describe 'navigation' do
       fill_in 'client[address]', with: 'Anything'
       fill_in 'client[obs]', with: 'Something'
 
-      expect { click_on 'Save' }.to change(Client, :count).by(1)
+      expect { click_on 'Create Client' }.to change(Client, :count).by(1)
     end
 
     it 'will have a user associated with it' do
       fill_in 'client[name]', with: 'Associated'
       fill_in 'client[address]', with: 'User associated'
-      click_on 'Save'
+      click_on 'Create Client'
 
       expect(User.last.clients.last.address).to eq('User associated')
     end
@@ -99,7 +99,7 @@ describe 'navigation' do
       fill_in 'client[address]', with: 'Edited address'
       fill_in 'client[obs]', with: 'Edited obs'
 
-      click_on 'Save'
+      click_on 'Update Client'
 
       expect(page).to have_content(/Edited address|Edited obs/)
     end

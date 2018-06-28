@@ -70,14 +70,14 @@ describe 'navigation' do
       fill_in 'purchase[amount]', with: 10
       fill_in 'purchase[description]', with: 'Anything'
 
-      expect { click_on 'Save' }.to change(Purchase, :count).by(1)
+      expect { click_on 'Create Purchase' }.to change(Purchase, :count).by(1)
     end
 
     it 'will have a user associated with it' do
       select 'FactoryBot vendor', from: :purchase_vendor, visible: false
       fill_in 'purchase[amount]', with: 11
       fill_in 'purchase[description]', with: 'User associated'
-      click_on 'Save'
+      click_on 'Create Purchase'
 
       expect(User.last.purchases.last.description).to eq('User associated')
     end
@@ -90,7 +90,7 @@ describe 'navigation' do
       fill_in 'purchase[amount]', with: 11
       fill_in 'purchase[description]', with: 'Edited purchase'
 
-      click_on 'Save'
+      click_on 'Update Purchase'
 
       expect(page).to have_content(/Edited purchase/)
     end

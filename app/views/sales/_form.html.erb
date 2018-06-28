@@ -4,7 +4,7 @@
 <div class='container-fluid'>
   <%= simple_form_for @sale do |f| %>
     <% if @clients.present? %>
-      <%= f.input :client, collection: Client.clients_by(current_user).collect(&:name) %>
+      <%= f.input :client, collection: Client.clients_by(current_user).collect(&:name).sort %>
     <% else %>
       <%= link_to 'Add client', new_client_path, class: 'btn btn-info create-btn' %>
     <% end %>

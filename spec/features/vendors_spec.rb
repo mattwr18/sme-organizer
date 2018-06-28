@@ -79,13 +79,13 @@ describe 'navigation' do
       fill_in 'vendor[phone_number]', with: 'Anything'
       fill_in 'vendor[obs]', with: 'Something'
 
-      expect { click_on 'Save' }.to change(Vendor, :count).by(1)
+      expect { click_on 'Create Vendor' }.to change(Vendor, :count).by(1)
     end
 
     it 'will have a user associated with it' do
       fill_in 'vendor[name]', with: 'Associated'
       fill_in 'vendor[phone_number]', with: 'User associated'
-      click_on 'Save'
+      click_on 'Create Vendor'
 
       expect(User.last.vendors.last.phone_number).to eq('User associated')
     end
@@ -99,7 +99,7 @@ describe 'navigation' do
       fill_in 'vendor[phone_number]', with: 'Edited phone number'
       fill_in 'vendor[obs]', with: 'Edited obs'
 
-      click_on 'Save'
+      click_on 'Update Vendor'
 
       expect(page).to have_content(/Edited phone number|Edited obs/)
     end

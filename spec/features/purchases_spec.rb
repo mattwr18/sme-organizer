@@ -6,7 +6,7 @@ describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
 
   let(:purchase) do
-    Purchase.create(amount: 10, description: 'Something', vendor: 'Someone', user_id: user.id)
+    Purchase.create(total: 10, description: 'Something', vendor: 'Someone', user_id: user.id)
   end
 
   before do
@@ -38,7 +38,7 @@ describe 'navigation' do
     it 'has a scope so that only purchases creators can see their purchases' do
       other_user = User.create(email: 'nonauth@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
 
-      purchase_from_other_user = Purchase.create(amount: 12, description: "This post shouldn't be seen", vendor: 'New', user_id: other_user.id)
+      purchase_from_other_user = Purchase.create(total: 12, description: "This post shouldn't be seen", vendor: 'New', user_id: other_user.id)
 
       visit purchases_path
 
@@ -67,7 +67,7 @@ describe 'navigation' do
 
     it 'has a way to create a purchase' do
       select 'FactoryBot vendor', from: :purchase_vendor, visible: false
-      fill_in 'purchase[amount]', with: 10
+      fill_in 'purchase[total]', with: 10
       fill_in 'purchase[description]', with: 'Anything'
 
       expect { click_on 'Create Purchase' }.to change(Purchase, :count).by(1)
@@ -75,7 +75,7 @@ describe 'navigation' do
 
     it 'will have a user associated with it' do
       select 'FactoryBot vendor', from: :purchase_vendor, visible: false
-      fill_in 'purchase[amount]', with: 11
+      fill_in 'purchase[total]', with: 11
       fill_in 'purchase[description]', with: 'User associated'
       click_on 'Create Purchase'
 
@@ -87,7 +87,7 @@ describe 'navigation' do
     it 'can be edited' do
       visit edit_purchase_path(purchase)
 
-      fill_in 'purchase[amount]', with: 11
+      fill_in 'purchase[total]', with: 11
       fill_in 'purchase[description]', with: 'Edited purchase'
 
       click_on 'Update Purchase'
@@ -103,7 +103,7 @@ describe 'navigation' do
       delete_user = FactoryBot.create(:user)
       login_as(delete_user, scope: :user)
 
-      purchase_to_delete = Purchase.create(amount: 15, description: 'Kinda expensive', vendor: 'Some vendor', user_id: delete_user.id)
+      purchase_to_delete = Purchase.create(total: 15, description: 'Kinda expensive', vendor: 'Some vendor', user_id: delete_user.id)
 
       visit purchases_path
 

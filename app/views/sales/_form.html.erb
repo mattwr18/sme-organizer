@@ -26,8 +26,8 @@
     <%= f.hidden_field :product_ids, value: false, class: 'sale-products-id' %>
   </div>
     <%= f.input :date_of_sale %>
-    <%= f.label :amount %>
-    <%= f.number_field :amount, id: 'sale-amount' %>
+    <%= f.label :total %>
+    <%= f.number_field :total, id: 'sale-total' %>
     <%= f.input :description %>
     <%= f.button :submit, class: 'btn btn-block btn-primary' %>
   <% end %>

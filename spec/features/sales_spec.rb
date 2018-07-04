@@ -6,7 +6,7 @@ describe 'navigation' do
   let(:user) { FactoryBot.create(:user) }
   let(:product) { FactoryBot.create(:product) }
   let(:sale) do
-    Sale.create(amount: 10, description: 'Something', client: 'Someone',
+    Sale.create(total: 10, description: 'Something', client: 'Someone',
                 user_id: user.id, product_ids: product.id)
   end
 
@@ -41,7 +41,7 @@ describe 'navigation' do
                                password: 'asdfasdf',
                                password_confirmation: 'asdfasdf')
 
-      Sale.create(amount: 12, description: "This product shouldn't be seen",
+      Sale.create(total: 12, description: "This product shouldn't be seen",
                   client: 'One', user_id: other_user.id)
 
       visit sales_path
@@ -75,7 +75,7 @@ describe 'navigation' do
     it 'can be edited' do
       visit edit_sale_path(sale)
 
-      fill_in 'sale[amount]', with: 11
+      fill_in 'sale[total]', with: 11
       fill_in 'sale[description]', with: 'Edited sale'
 
       click_on 'Update Sale'
@@ -91,7 +91,7 @@ describe 'navigation' do
       delete_user = FactoryBot.create(:user)
       login_as(delete_user, scope: :user)
 
-      sale_to_delete = Sale.create(amount: 15, description: 'Kinda expensive',
+      sale_to_delete = Sale.create(total: 15, description: 'Kinda expensive',
                                    client: 'Anyone', user_id: delete_user.id,
                                    product_ids: product.id)
 

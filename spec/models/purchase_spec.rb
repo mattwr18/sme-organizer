@@ -17,13 +17,13 @@ RSpec.describe Purchase, type: :model do
       expect(@purchase).to_not be_valid
     end
 
-    it 'cannot be created without an amount' do
-      @purchase.amount = nil
+    it 'cannot be created without an total' do
+      @purchase.total = nil
       expect(@purchase).to_not be_valid
     end
 
-    it 'has an amount greater than 0.0' do
-      @purchase.amount = 0.0
+    it 'has an total greater than 0.0' do
+      @purchase.total = 0.0
       expect(@purchase).to_not be_valid
     end
 

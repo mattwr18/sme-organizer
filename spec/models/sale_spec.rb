@@ -18,13 +18,13 @@ RSpec.describe Sale, type: :model do
       expect(@sale).to_not be_valid
     end
 
-    it 'cannot be created without an amount' do
-      @sale.amount = nil
+    it 'cannot be created without an total' do
+      @sale.total = nil
       expect(@sale).to_not be_valid
     end
 
-    it 'has an amount greater than 0.0' do
-      @sale.amount = 0.0
+    it 'has an total greater than 0.0' do
+      @sale.total = 0.0
       expect(@sale).to_not be_valid
     end
   end

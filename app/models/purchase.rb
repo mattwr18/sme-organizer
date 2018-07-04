@@ -2,7 +2,10 @@
 
 class Purchase < ApplicationRecord
   belongs_to :user
-  validates :amount, presence: true, numericality: { greater_than: 0.0 }
+  has_and_belongs_to_many :ingredients
+  accepts_nested_attributes_for :ingredients, allow_destroy: true,
+                                              reject_if: ->(attr) { attr.all? { |key, value| key == '_destroy' || value.blank? } }
+  validates :total, presence: true, numericality: { greater_than: 0.0 }
   validates_presence_of :description
   validates_presence_of :vendor
 

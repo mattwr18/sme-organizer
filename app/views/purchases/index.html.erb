@@ -14,7 +14,7 @@
       <th>Id</th>
       <th>Date</th>
       <th>Vendor</th>
-      <th>Amount</th>
+      <th>Total</th>
       <th>Description</th>
     </tr>
   </thead>
@@ -23,5 +23,5 @@
   </tbody>
 </table>
 <div class='container'>
-  <h2>Total purchases: <%= number_to_currency @purchases.sum(:amount) %></h2>
+  <h2>Total purchases: <%= number_to_currency @purchases.sum(:total) %></h2>
 </div>

@@ -2,14 +2,14 @@
 
 FactoryBot.define do
   factory :purchase do
-    amount 15
+    total 15
     description 'FactoryBot purchase'
     user
     vendor 'FactoryBot vendor'
   end
 
   factory :second_purchase, class: 'Purchase' do
-    amount 20
+    total 20
     description 'FactoryBot second purchase'
     user
     vendor 'FactoryBot second vendor'

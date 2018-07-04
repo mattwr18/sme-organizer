@@ -2,7 +2,7 @@
 
 <%= simple_form_for @purchase do |f| %>
   <%= f.input :vendor, collection: Vendor.vendors_by(current_user).collect { |c| c.name } %>
-  <%= f.input :amount, class: 'col-sm-2 control-label' %>
+  <%= f.input :total, class: 'col-sm-2 control-label' %>
   <%= f.input :description, class: 'col-sm-2 control-label' %>
   <%= f.button :submit, class: 'btn btn-primary btn-block' %>
 <% end %>

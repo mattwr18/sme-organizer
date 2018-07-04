@@ -47,6 +47,6 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.require(:purchase).permit(:amount, :description, :vendor)
+    params.require(:purchase).permit(:total, :description, :vendor)
   end
 end

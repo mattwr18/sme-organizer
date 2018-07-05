@@ -12,23 +12,14 @@ RSpec.describe Purchase, type: :model do
       expect(@purchase).to be_valid
     end
 
-    it 'cannot be created without a vendor' do
-      @purchase.vendor = nil
-      expect(@purchase).to_not be_valid
-    end
 
-    it 'cannot be created without an total' do
+    it 'cannot be created without a total' do
       @purchase.total = nil
       expect(@purchase).to_not be_valid
     end
 
     it 'has an total greater than 0.0' do
       @purchase.total = 0.0
-      expect(@purchase).to_not be_valid
-    end
-
-    it 'cannot be created without a description' do
-      @purchase.description = nil
       expect(@purchase).to_not be_valid
     end
   end

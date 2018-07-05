@@ -24,8 +24,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.user_id = current_user.id
-
+    set_user_id
     if @product.save
       redirect_to @product, notice: 'Product was successfully created'
     else
@@ -34,6 +33,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    set_user_id
     if @product.update(product_params)
       redirect_to @product, notice: 'Product was successfully edited'
     else
@@ -47,22 +47,23 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: 'Product was successfully deleted'
   end
 
-  def search
-    @product = Product.find(params[:product_id])
-
-    render json @product
-  end
-
   private
 
   def set_product
     @product = Product.find(params[:id])
   end
 
+  def set_user_id
+    @product.user_id = current_user.id
+    @product.ingredients.each do |ingredient|
+      ingredient.user_id = current_user.id
+    end
+  end
+
   def product_params
     params.require(:product)
           .permit(:name, :price,
-                  ingredients_attributes: %i[name amount amount_type],
+                  ingredients_attributes: %i[name amount amount_type id],
                   sale_ids: [], ingredient_ids: [])
   end
 end

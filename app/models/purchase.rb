@@ -6,8 +6,5 @@ class Purchase < ApplicationRecord
   accepts_nested_attributes_for :ingredients, allow_destroy: true,
                                               reject_if: ->(attr) { attr.all? { |key, value| key == '_destroy' || value.blank? } }
   validates :total, presence: true, numericality: { greater_than: 0.0 }
-  validates_presence_of :description
-  validates_presence_of :vendor
-
   scope :purchases_by, ->(user) { where(user_id: user.id) }
 end

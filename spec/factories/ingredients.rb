@@ -5,11 +5,13 @@ FactoryBot.define do
     name 'FactoryBot ingredient'
     amount 1
     amount_type 'gram(s)'
+    user
   end
 
   factory :second_ingredient, class: 'Ingredient' do
     name 'FactoryBot second ingredient'
     amount 3
     amount_type 'kilo(s)'
+    user
   end
 end

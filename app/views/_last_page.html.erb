@@ -1,5 +1,0 @@
-<% unless current_page.last? %>
-  <li class="page-item">
-    <%= link_to_unless current_page.last?, t('views.pagination.last'), url, class: 'page-link', remote: remote %>
-  </li>
-<% end %>

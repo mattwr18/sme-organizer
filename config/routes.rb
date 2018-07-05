@@ -8,9 +8,7 @@ Rails.application.routes.draw do
   resources :clients
   resources :vendors
   resources :ingredients
-  resources :products do
-    post 'search'
-  end
+  resources :products 
   resources :sales
   resources :products_sales, only: %i[index show]
 end

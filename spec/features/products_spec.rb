@@ -48,6 +48,8 @@ describe 'navigation' do
   end
 
   describe 'creation' do
+    let(:ingredient) { FactoryBot.create(:ingredient) }
+
     before do
       visit new_product_path
     end
@@ -70,19 +72,14 @@ describe 'navigation' do
     end
 
     it 'allows product creation with ingredients' do
+      FactoryBot.create(:ingredient)
+      visit new_product_path
       fill_in :product_name, with: 'Product name'
+      select 'FactoryBot ingredient', from: 'product_ingredients_attributes_0_name'
       fill_in :product_ingredients_attributes_0_amount, with: 150
       select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
 
       expect { click_on 'Create Product' }.to change(Product, :count).by(1)
-    end
-
-    it 'allows ingredient creation with prodcuts' do
-      fill_in 'Name', with: 'Product'
-      fill_in :product_ingredients_attributes_0_amount, with: 150
-      select 'gram(s)', from: :product_ingredients_attributes_0_amount_type
-
-      expect { click_on 'Create Product' }.to change(Ingredient, :count).by(1)
     end
 
     it 'allows product creation without ingredients' do
@@ -144,6 +141,7 @@ describe 'navigation' do
         product_with_ingredient = FactoryBot.create(:product_with_ingredient)
 
         visit edit_product_path(product_with_ingredient)
+        select 'FactoryBot ingredient', from: 'Ingredient'
         fill_in 'product_ingredients_attributes_0_amount', with: 100
 
         click_on 'Update Product'

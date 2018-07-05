@@ -1,0 +1,8 @@
+<%= render 'shared/errors', object: @ingredient %>
+
+<%= simple_form_for @ingredient do |f| %>
+  <%= f.input :name %>
+  <%= f.button :submit, class: 'btn btn-primary btn-block' %>
+<% end %>
+
+<%= link_to 'Back', ingredients_path, class: 'btn btn-block btn-info' %>

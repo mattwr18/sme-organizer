@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="jumbotron">
+    <h2>Name: <%= @ingredient.name %></h2>
+    <div class="col-md-12 text-center">
+      <%= link_to 'Back', ingredients_path, class: "btn btn-lg btn-dark" %> |
+      <%= link_to 'Create new ingredient', new_ingredient_path, class: "btn btn-lg btn-secondary" %> |
+      <%= link_to 'Edit', edit_ingredient_path(@ingredient), class: "btn btn-lg btn-dark" %>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<tr>
+  <td><%= ingredient.name %></td>
+  <td><%= link_to 'Show', ingredient_path(ingredient) %></td>
+  <td ><%= link_to 'Edit', edit_ingredient_path(ingredient), id: "edit_#{ingredient.id}", class: "fa fa-pencil i fa-2x index_icons" %></td>
+  <td ><%= link_to 'Delete', ingredient_path(ingredient), method: :delete, id: "delete_ingredient_#{ingredient.id}_from_index", class: "fa fa-trash-o fa-2x index_icons", data: { confirm: "Are you sure?"} %></td>
+</tr>

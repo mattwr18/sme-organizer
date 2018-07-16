@@ -6,6 +6,16 @@ FactoryBot.define do
     description 'FactoryBot purchase'
     user
     vendor 'FactoryBot vendor'
+
+    factory :purchase_with_ingredient do
+      transient do
+        ingredients_count 1
+
+        after(:create) do |purchase, evaluator|
+          create_list(:ingredient, evaluator.ingredients_count, purchases: [purchase])
+        end
+      end
+    end
   end
 
   factory :second_purchase, class: 'Purchase' do

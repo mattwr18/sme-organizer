@@ -50,7 +50,8 @@ describe 'navigation' do
 
     it 'has a new form that can be reached' do
       expect(page.status_code).to eq(200)
-      expect(page).to have_css('input', count: 2)
+      expect(page).to have_css('input', count: 3)
+      expect(page).to have_css('select', count: 3)
     end
 
     it 'has a way to create a purchase' do
@@ -69,6 +70,22 @@ describe 'navigation' do
 
       expect(User.last.purchases.last.description).to eq('User associated')
     end
+
+    it 'has nested forms for Ingredients' do
+      expect(page).to have_field(:purchase_ingredients_attributes_0_name)
+      expect(page).to have_field(:purchase_ingredients_attributes_0_amount)
+      expect(page).to have_field(:purchase_ingredients_attributes_0_amount_type)
+    end
+
+    it 'allows purchase creation with ingredients' do
+      FactoryBot.create(:ingredient)
+      visit new_purchase_path
+      select 'FactoryBot ingredient', from: 'purchase_ingredients_attributes_0_name'
+      fill_in :purchase_ingredients_attributes_0_amount, with: 150
+      select 'gram(s)', from: :purchase_ingredients_attributes_0_amount_type
+      fill_in :purchase_total, with: 15
+      expect { click_on 'Create Purchase' }.to change(Purchase, :count).by(1)
+    end
   end
 
   describe 'edit' do
@@ -81,6 +98,32 @@ describe 'navigation' do
       click_on 'Update Purchase'
 
       expect(page).to have_content(/Edited purchase/)
+    end
+
+    context 'editing ingredients', js: true do
+      it 'allows an ingredient to be added later' do
+        FactoryBot.create(:ingredient)
+        visit edit_purchase_path(purchase)
+        click_on 'Add ingredient'
+
+        within ('.nested-fields') do
+          select 'FactoryBot ingredient', from: 'Ingredient'
+        end
+
+        click_on 'Update Purchase'
+        expect(page).to have_content(/FactoryBot ingredient/)
+      end
+
+      it 'allows editing of ingredients' do
+        purchase_with_ingredient = FactoryBot.create(:purchase_with_ingredient)
+
+        visit edit_purchase_path(purchase_with_ingredient)
+        select 'FactoryBot ingredient', from: 'Ingredient'
+        fill_in 'purchase_ingredients_attributes_0_amount', with: 100
+
+        click_on 'Update Purchase'
+        expect(page).to have_content(/100/)
+      end
     end
   end
 

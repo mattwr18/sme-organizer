@@ -1,0 +1,5 @@
+<div class='nested-fields'>
+  <%= f.input :name, label: 'Ingredient', collection: Ingredient.all.collect(&:name).reject(&:blank?).uniq %>
+  <%= f.input :amount %>
+  <%= f.input :amount_type, collection: ['gram(s)', 'kilo(s)', 'liter(s)', 'millilter(s)'], class: "ingredient_field_amount_type" %>
+</div>

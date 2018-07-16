@@ -2,6 +2,14 @@
   <div class="jumbotron">
     <h2>Vendor: <%= @purchase.vendor %></h2>
     <h2>Description: <%= @purchase.description %></h2>
+    <div class="container">
+      <% @purchase.ingredients.each do |ingredient| %>
+        <ul>
+          <li><%= ingredient.name %></li>
+          <li><%= ingredient.amount %> <%= ingredient.amount_type %></li>
+        </ul>
+      <% end %>
+    </div>
     <h2>Total: <%= @purchase.total %></h2><br>
 
     <div class="col-md-12 text-center">

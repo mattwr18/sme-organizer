@@ -93,11 +93,6 @@ describe 'navigation' do
 
         expect(page).to have_css('input', count: 5)
       end
-
-      it 'allows selection of previously used ingredients' do
-        ingredient1 = FactoryBot.create(:ingredient)
-        visit new_product_path
-      end
     end
 
     it 'will have a user associated with it' do

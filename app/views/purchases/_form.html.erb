@@ -2,9 +2,14 @@
 
 <%= simple_form_for @purchase do |f| %>
   <%= f.input :vendor, collection: Vendor.vendors_by(current_user).collect { |c| c.name } %>
+  <%= f.simple_fields_for :ingredients do |ingredient| %>
+    <%= render 'ingredient_fields', f: ingredient %>
+  <% end %>
   <%= f.input :total, class: 'col-sm-2 control-label' %>
   <%= f.input :description, class: 'col-sm-2 control-label' %>
-  <%= f.button :submit, class: 'btn btn-primary btn-block' %>
+<div id="add_purchase_ingredients">
+  <%= link_to_add_association 'Add ingredient', f, :ingredients, class: "btn btn-block btn-primary" %><br>
+  <%= f.button :submit, class: "btn btn-success btn-block" %><br>
+  <%= link_to 'Back', products_path, class: "btn btn-block btn-info" %><br>
 <% end %>
-
-<%= link_to 'Back', purchases_path, class: 'btn btn-block btn-info' %>
+</div>
